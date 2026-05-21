@@ -25,6 +25,7 @@ services:
       - redis_data:/data
 
   migrate:
+    image: ghcr.io/peubraw/disparoswpp-migrate:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -45,9 +46,13 @@ services:
       EVOLUTION_API_KEY: ${EVOLUTION_API_KEY:-CHANGE_ME}
 
   app:
+    image: ghcr.io/peubraw/disparoswpp-app:latest
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_BASE_PATH: ${NEXT_PUBLIC_BASE_PATH:-}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-}
     ports:
       - "3001:3001"
     depends_on:
@@ -70,6 +75,7 @@ services:
       EVOLUTION_API_KEY: ${EVOLUTION_API_KEY:-CHANGE_ME}
 
   worker:
+    image: ghcr.io/peubraw/disparoswpp-worker:latest
     build:
       context: .
       dockerfile: workers/Dockerfile
