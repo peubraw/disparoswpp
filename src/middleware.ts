@@ -5,7 +5,8 @@ import type { NextRequest } from "next/server";
 export default async function middleware(request: NextRequest) {
   const session = await auth();
   if (!session) {
-    const loginUrl = new URL("/login", request.url);
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+    const loginUrl = new URL(`${basePath}/login`, new URL(request.url).origin);
     return NextResponse.redirect(loginUrl);
   }
   return NextResponse.next();
