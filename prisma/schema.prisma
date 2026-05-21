@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum WaInstanceStatus {
+  DISCONNECTED
+  CONNECTING
+  CONNECTED
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  RUNNING
+  PAUSED
+  COMPLETED
+  FAILED
+}
+
+enum MediaType {
+  NONE
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+}
+
+enum MessageStatus {
+  PENDING
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  passwordHash  String
+  name          String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  waInstances   WaInstance[]
+  campaigns     Campaign[]
+  contactLists  ContactList[]
+  inboxMessages InboxMessage[]
+}
+
+model WaInstance {
+  id                  String           @id @default(uuid())
+  userId              String
+  user                User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  instanceName        String           @unique
+  phoneNumber         String?
+  status              WaInstanceStatus @default(DISCONNECTED)
+  evolutionInstanceId String?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  campaigns           Campaign[]
+  inboxMessages       InboxMessage[]
+
+  @@index([userId])
+}
+
+model ContactList {
+  id                   String                  @id @default(uuid())
+  userId               String
+  user                 User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                 String
+  createdAt            DateTime                @default(now())
+  contacts             Contact[]
+  campaignContactLists CampaignContactList[]
+}
+
+model Contact {
+  id            String      @id @default(uuid())
+  contactListId String
+  contactList   ContactList @relation(fields: [contactListId], references: [id], onDelete: Cascade)
+  phoneNumber   String
+  name          String?
+  customFields  Json        @default("{}")
+  createdAt     DateTime    @default(now())
+
+  @@index([contactListId])
+}
+
+model Campaign {
+  id              String            @id @default(uuid())
+  userId          String
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  waInstanceId    String
+  waInstance      WaInstance        @relation(fields: [waInstanceId], references: [id])
+  name            String
+  status          CampaignStatus    @default(DRAFT)
+  messageTemplate String
+  mediaUrl        String?
+  mediaType       MediaType         @default(NONE)
+  scheduledFor    DateTime?
+  throttleDelay   Int               @default(3000)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  messages        Message[]
+  contactLists    CampaignContactList[]
+
+  @@index([userId])
+}
+
+model CampaignContactList {
+  id            String      @id @default(uuid())
+  campaignId    String
+  campaign      Campaign    @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  contactListId String
+  contactList   ContactList @relation(fields: [contactListId], references: [id], onDelete: Restrict)
+}
+
+model Message {
+  id                 String        @id @default(uuid())
+  campaignId         String
+  campaign           Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  contactPhone       String
+  status             MessageStatus @default(PENDING)
+  errorMessage       String?
+  sentAt             DateTime?
+  evolutionMessageId String?
+  createdAt          DateTime      @default(now())
+
+  @@index([campaignId])
+}
+
+model InboxMessage {
+  id           String     @id @default(uuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  waInstanceId String
+  waInstance   WaInstance @relation(fields: [waInstanceId], references: [id])
+  fromPhone    String
+  body         String
+  mediaUrl     String?
+  isRead       Boolean    @default(false)
+  receivedAt   DateTime   @default(now())
+}

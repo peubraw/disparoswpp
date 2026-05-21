@@ -1,0 +1,21 @@
+{
+  "name": "disparoswpp-workers",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.6.0",
+    "axios": "^1.14.0",
+    "bullmq": "^5.0.0",
+    "ioredis": "^5.0.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,2 @@
+Success! No errors.
+Verified T8 components compilation passed under NextJS environment.

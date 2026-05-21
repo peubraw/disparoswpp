@@ -1,0 +1,152 @@
+docker compose config output
+name: disparoswpp
+services:
+  app:
+    build:
+      context: /home/peubraw/projetos/disparoswpp
+      dockerfile: Dockerfile
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+        required: true
+      postgres:
+        condition: service_healthy
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      DATABASE_URL: postgresql://disparos:CHANGE_ME@postgres:5432/disparoswpp
+      EVOLUTION_API_KEY: CHANGE_ME
+      EVOLUTION_API_URL: http://evolution-api:8080
+      HOSTNAME: 0.0.0.0
+      NEXT_PUBLIC_APP_URL: http://localhost:3001
+      NEXTAUTH_SECRET: CHANGE_ME_32_CHARS_MIN
+      NEXTAUTH_URL: http://localhost:3001
+      NODE_ENV: production
+      PORT: "3001"
+      REDIS_URL: redis://redis:6379
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 3001
+        published: "3001"
+        protocol: tcp
+  evolution-api:
+    image: atendai/evolution-api:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8080
+        published: "8081"
+        protocol: tcp
+    shm_size: "1073741824"
+    volumes:
+      - type: volume
+        source: evolution_instances
+        target: /evolution/instances
+        volume: {}
+  migrate:
+    build:
+      context: /home/peubraw/projetos/disparoswpp
+      dockerfile: Dockerfile
+    command:
+      - sh
+      - -lc
+      - npx prisma migrate deploy && npm run db:seed
+    depends_on:
+      postgres:
+        condition: service_healthy
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      DATABASE_URL: postgresql://disparos:CHANGE_ME@postgres:5432/disparoswpp
+      EVOLUTION_API_KEY: CHANGE_ME
+      EVOLUTION_API_URL: http://evolution-api:8080
+      NEXT_PUBLIC_APP_URL: http://localhost:3001
+      NEXTAUTH_SECRET: CHANGE_ME_32_CHARS_MIN
+      NEXTAUTH_URL: http://localhost:3001
+      REDIS_URL: redis://redis:6379
+    networks:
+      default: null
+  postgres:
+    environment:
+      POSTGRES_DB: disparoswpp
+      POSTGRES_PASSWORD: CHANGE_ME
+      POSTGRES_USER: disparos
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U disparos -d disparoswpp
+      timeout: 5s
+      interval: 10s
+      retries: 5
+      start_period: 10s
+    image: postgres:16-alpine
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 5432
+        published: "5433"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+        volume: {}
+  redis:
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --maxmemory-policy
+      - noeviction
+    image: redis:7-alpine
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 6379
+        published: "6380"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: redis_data
+        target: /data
+        volume: {}
+  worker:
+    build:
+      context: /home/peubraw/projetos/disparoswpp
+      dockerfile: workers/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      DATABASE_URL: postgresql://disparos:CHANGE_ME@postgres:5432/disparoswpp
+      EVOLUTION_API_KEY: CHANGE_ME
+      EVOLUTION_API_URL: http://evolution-api:8080
+      REDIS_URL: redis://redis:6379
+    networks:
+      default: null
+networks:
+  default:
+    name: disparoswpp_default
+volumes:
+  evolution_instances:
+    name: disparoswpp_evolution_instances
+  postgres_data:
+    name: disparoswpp_postgres_data
+  redis_data:
+    name: disparoswpp_redis_data

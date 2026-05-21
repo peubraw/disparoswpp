@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "active_work_id": "disparoswpp-7492f7ba",
+  "works": {
+    "disparoswpp-7492f7ba": {
+      "work_id": "disparoswpp-7492f7ba",
+      "active_plan": "/home/peubraw/projetos/disparoswpp/.omo/plans/disparoswpp.md",
+      "plan_name": "disparoswpp",
+      "status": "active",
+      "started_at": "2026-05-21T19:25:04.310Z",
+      "updated_at": "2026-05-21T20:22:43.344Z",
+      "session_ids": [
+        "ses_1b4462f74ffePrAhjYk1M4nFtm"
+      ],
+      "session_origins": {
+        "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct"
+      },
+      "agent": "atlas",
+      "task_sessions": {
+        "final-wave:f1": {
+          "task_key": "final-wave:f1",
+          "task_label": "F1",
+          "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
+          "session_id": "ses_1b3cf1a37ffePS3iUm6ULdZPF5",
+          "agent": "Sisyphus-Junior",
+          "category": "unspecified-high",
+          "started_at": "2026-05-21T19:35:18.324Z",
+          "status": "running",
+          "updated_at": "2026-05-21T20:22:43.345Z"
+        }
+      }
+    }
+  },
+  "active_plan": "/home/peubraw/projetos/disparoswpp/.omo/plans/disparoswpp.md",
+  "started_at": "2026-05-21T19:25:04.310Z",
+  "status": "active",
+  "updated_at": "2026-05-21T20:22:43.344Z",
+  "session_ids": [
+    "ses_1b4462f74ffePrAhjYk1M4nFtm"
+  ],
+  "session_origins": {
+    "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct"
+  },
+  "plan_name": "disparoswpp",
+  "task_sessions": {
+    "final-wave:f1": {
+      "task_key": "final-wave:f1",
+      "task_label": "F1",
+      "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
+      "session_id": "ses_1b3cf1a37ffePS3iUm6ULdZPF5",
+      "agent": "Sisyphus-Junior",
+      "category": "unspecified-high",
+      "started_at": "2026-05-21T19:35:18.324Z",
+      "status": "running",
+      "updated_at": "2026-05-21T20:22:43.345Z"
+    }
+  },
+  "agent": "atlas"
+}
