@@ -8,7 +8,7 @@
       "plan_name": "disparoswpp",
       "status": "active",
       "started_at": "2026-05-21T19:25:04.310Z",
-      "updated_at": "2026-05-21T20:22:43.344Z",
+      "updated_at": "2026-05-21T21:22:55.836Z",
       "session_ids": [
         "ses_1b4462f74ffePrAhjYk1M4nFtm"
       ],
@@ -21,12 +21,12 @@
           "task_key": "final-wave:f1",
           "task_label": "F1",
           "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
-          "session_id": "ses_1b3cf1a37ffePS3iUm6ULdZPF5",
+          "session_id": "ses_1b394ecdaffewwSiGRR5JD3d8E",
           "agent": "Sisyphus-Junior",
-          "category": "unspecified-high",
+          "category": "quick",
           "started_at": "2026-05-21T19:35:18.324Z",
           "status": "running",
-          "updated_at": "2026-05-21T20:22:43.345Z"
+          "updated_at": "2026-05-21T21:22:55.836Z"
         }
       }
     }
@@ -34,7 +34,7 @@
   "active_plan": "/home/peubraw/projetos/disparoswpp/.omo/plans/disparoswpp.md",
   "started_at": "2026-05-21T19:25:04.310Z",
   "status": "active",
-  "updated_at": "2026-05-21T20:22:43.344Z",
+  "updated_at": "2026-05-21T21:22:55.836Z",
   "session_ids": [
     "ses_1b4462f74ffePrAhjYk1M4nFtm"
   ],
@@ -47,12 +47,12 @@
       "task_key": "final-wave:f1",
       "task_label": "F1",
       "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
-      "session_id": "ses_1b3cf1a37ffePS3iUm6ULdZPF5",
+      "session_id": "ses_1b394ecdaffewwSiGRR5JD3d8E",
       "agent": "Sisyphus-Junior",
-      "category": "unspecified-high",
+      "category": "quick",
       "started_at": "2026-05-21T19:35:18.324Z",
       "status": "running",
-      "updated_at": "2026-05-21T20:22:43.345Z"
+      "updated_at": "2026-05-21T21:22:55.836Z"
     }
   },
   "agent": "atlas"

@@ -28,6 +28,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: migrate
     depends_on:
       postgres:
         condition: service_healthy
@@ -88,6 +89,17 @@ services:
     ports:
       - "127.0.0.1:8081:8080"
     shm_size: "1g"
+    environment:
+      AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY:-EvolutionKey2025Secure}
+      SERVER_URL: http://evolution-api:8080
+      NODE_ENV: production
+      DATABASE_ENABLED: "false"
+      REDIS_ENABLED: "false"
+      LOG_LEVEL: ERROR
+      LOG_COLOR: "false"
+      LOG_BAILEYS: "false"
+      DEL_INSTANCE: "false"
+      WEBHOOK_GLOBAL_ENABLED: "false"
     volumes:
       - evolution_instances:/evolution/instances
 
