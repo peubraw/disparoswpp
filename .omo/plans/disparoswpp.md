@@ -1177,7 +1177,7 @@ Wave FINAL (após TODAS as tasks — 4 revisores em paralelo):
   **Commit**: YES
   - Message: `feat(inbox): read-only inbox for received WhatsApp messages`
 
-- [ ] T15. Deploy na VPS Quantum Key
+- [~] T15. Deploy na VPS Quantum Key
 
   **What to do**:
   - Conectar na VPS via SSH (`ssh server`)

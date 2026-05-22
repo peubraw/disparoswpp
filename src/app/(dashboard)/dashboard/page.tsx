@@ -21,26 +21,28 @@ export default async function DashboardPage() {
 }
 
 async function DashboardContent() {
-  try {
-    const stats = await getDashboardStats();
+  let stats;
 
-    return (
-      <div className="space-y-6">
-        <StatsCards stats={stats} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <MessagesChart data={stats.chartData} />
-          <InstanceStatusList instances={stats.instances} />
-        </div>
-        <RecentCampaigns campaigns={stats.recentCampaigns} />
-      </div>
-    );
-  } catch (error) {
+  try {
+    stats = await getDashboardStats();
+  } catch {
     return (
       <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
         <p className="text-sm text-muted-foreground">Erro ao carregar o dashboard. Tente novamente.</p>
       </div>
     );
   }
+
+  return (
+    <div className="space-y-6">
+      <StatsCards stats={stats} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <MessagesChart data={stats.chartData} />
+        <InstanceStatusList instances={stats.instances} />
+      </div>
+      <RecentCampaigns campaigns={stats.recentCampaigns} />
+    </div>
+  );
 }
 
 function DashboardSkeleton() {

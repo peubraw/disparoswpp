@@ -71,7 +71,10 @@ export function MediaUpload({ onFileSelected }: MediaUploadProps) {
             </div>
             
             {preview && file.type.startsWith("image/") && (
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={preview} alt="Preview" className="max-h-48 rounded-md object-contain" />
+              </>
             )}
             
             {preview && file.type.startsWith("video/") && (

@@ -30,33 +30,6 @@ export function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const NavLinks = () => (
-    <nav className="space-y-1 mt-6" data-testid="sidebar">
-      {navItems.map((item) => {
-        const isActive = pathname === item.href || pathname?.startsWith(`${item.href}/`);
-        const Icon = item.icon;
-        
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={() => setOpen(false)}
-            className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-              isActive 
-                ? "bg-whatsapp/10 text-whatsapp" 
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            <Icon className="h-5 w-5" />
-            {item.label}
-            {item.href === "/inbox" && <UnreadBadge />}
-          </Link>
-        );
-      })}
-    </nav>
-  );
-
   return (
     <>
       {/* Desktop Sidebar */}
@@ -68,7 +41,7 @@ export function Sidebar() {
           </div>
         </div>
         <div className="flex-1 overflow-y-auto px-4 py-4">
-          <NavLinks />
+          <SidebarNavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
         </div>
       </aside>
 
@@ -89,11 +62,46 @@ export function Sidebar() {
               </div>
             </div>
             <div className="px-4 py-4">
-              <NavLinks />
+              <SidebarNavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
             </div>
           </SheetContent>
         </Sheet>
       </div>
     </>
+  );
+}
+
+function SidebarNavLinks({
+  pathname,
+  onNavigate,
+}: {
+  pathname: string | null;
+  onNavigate: () => void;
+}) {
+  return (
+    <nav className="mt-6 space-y-1" data-testid="sidebar">
+      {navItems.map((item) => {
+        const isActive = pathname === item.href || pathname?.startsWith(`${item.href}/`);
+        const Icon = item.icon;
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onNavigate}
+            className={cn(
+              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              isActive
+                ? "bg-whatsapp/10 text-whatsapp"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            )}
+          >
+            <Icon className="h-5 w-5" />
+            {item.label}
+            {item.href === "/inbox" && <UnreadBadge />}
+          </Link>
+        );
+      })}
+    </nav>
   );
 }

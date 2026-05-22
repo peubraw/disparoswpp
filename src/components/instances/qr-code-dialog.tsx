@@ -25,7 +25,6 @@ export function QRCodeDialog({
   onOpenChange,
 }: QRCodeDialogProps) {
   const [base64, setBase64] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [expired, setExpired] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -38,21 +37,20 @@ export function QRCodeDialog({
   useEffect(() => {
     if (!open) {
       clearTimers();
-      setBase64(null);
-      setExpired(false);
       return;
     }
 
-    setLoading(true);
-    setExpired(false);
+    Promise.resolve().then(() => {
+      setBase64(null);
+      setExpired(false);
+    });
 
     fetch(`/api/instances/${instanceId}/qr`)
       .then((r) => r.json() as Promise<QRResponse>)
       .then((data) => {
         setBase64(data.base64);
-        setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {});
 
     intervalRef.current = setInterval(() => {
       fetch(`/api/instances/${instanceId}/qr`)
@@ -85,10 +83,13 @@ export function QRCodeDialog({
             <p className="text-sm text-destructive">
               QR code expirado, tente novamente.
             </p>
-          ) : loading ? (
+          ) : !base64 ? (
             <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent" />
           ) : base64 ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={base64} alt="QR Code" className="h-64 w-64" />
+            </>
           ) : (
             <p className="text-sm text-muted-foreground">
               QR code não disponível.
