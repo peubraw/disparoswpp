@@ -100,6 +100,7 @@ services:
       SERVER_URL: http://evolution-api:8080
       NODE_ENV: production
       DATABASE_ENABLED: "false"
+      DATABASE_PROVIDER: postgresql
       REDIS_ENABLED: "false"
       LOG_LEVEL: ERROR
       LOG_COLOR: "false"
