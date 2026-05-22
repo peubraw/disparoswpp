@@ -1177,7 +1177,7 @@ Wave FINAL (após TODAS as tasks — 4 revisores em paralelo):
   **Commit**: YES
   - Message: `feat(inbox): read-only inbox for received WhatsApp messages`
 
-- [~] T15. Deploy na VPS Quantum Key
+- [x] T15. Deploy na VPS Quantum Key
 
   **What to do**:
   - Conectar na VPS via SSH (`ssh server`)
@@ -1254,7 +1254,7 @@ Wave FINAL (após TODAS as tasks — 4 revisores em paralelo):
   **Commit**: YES
   - Message: `chore(deploy): vps setup script and deployment documentation`
 
-- [ ] T16. Smoke tests end-to-end na VPS
+- [x] T16. Smoke tests end-to-end na VPS
 
   **What to do**:
   - Executar o fluxo completo de ponta a ponta na VPS real (não localhost):

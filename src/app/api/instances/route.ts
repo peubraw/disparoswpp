@@ -13,7 +13,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await req.json() as { name?: unknown };
+  let body: { name?: unknown };
+  try {
+    body = await req.json() as { name?: unknown };
+  } catch {
+    return NextResponse.json({ error: "JSON inválido." }, { status: 400 });
+  }
   const name = typeof body.name === "string" ? body.name.trim() : "";
 
   if (!name) {

@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth-utils";
+import { auth } from "@/auth";
 import { MessageStatus, Prisma } from "@prisma/client";
 
 export async function GET(
@@ -9,8 +9,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = await getCurrentUser();
-    if (!user) {
+    const session = await auth();
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -29,7 +29,7 @@ export async function GET(
     if (!campaign) {
       return NextResponse.json({ error: "Not Found" }, { status: 404 });
     }
-    if (campaign.userId !== user.id) {
+    if (campaign.userId !== session.user.id) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

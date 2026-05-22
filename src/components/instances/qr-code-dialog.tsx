@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -87,8 +88,7 @@ export function QRCodeDialog({
             <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent" />
           ) : base64 ? (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={base64} alt="QR Code" className="h-64 w-64" />
+              <Image src={base64} alt="QR Code" width={256} height={256} unoptimized />
             </>
           ) : (
             <p className="text-sm text-muted-foreground">

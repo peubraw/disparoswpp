@@ -1,13 +1,25 @@
 export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
-import { getCurrentUser } from "@/lib/auth-utils";
+import { auth } from "@/auth";
 import fs from "fs";
 import path from "path";
 
+const MAX_FILE_SIZE = 16 * 1024 * 1024;
+const ALLOWED_MIME_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "video/mp4",
+  "audio/mpeg",
+  "audio/ogg",
+  "application/pdf",
+];
+
 export async function POST(req: NextRequest) {
   try {
-    const user = await getCurrentUser();
-    if (!user) {
+    const session = await auth();
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -18,7 +30,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    const uploadDir = path.join(process.cwd(), "public", "uploads", user.id);
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json({ error: "Arquivo excede o tamanho máximo de 16MB." }, { status: 422 });
+    }
+
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+      return NextResponse.json({ error: "Tipo de arquivo não permitido." }, { status: 422 });
+    }
+
+    const uploadDir = path.join(process.cwd(), "public", "uploads", session.user.id);
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -31,10 +51,10 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     fs.writeFileSync(filePath, buffer);
 
-    const url = `/uploads/${user.id}/${filename}`;
+    const url = `/uploads/${session.user.id}/${filename}`;
 
     return NextResponse.json({ url });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

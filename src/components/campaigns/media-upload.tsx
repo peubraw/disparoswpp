@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -72,8 +73,7 @@ export function MediaUpload({ onFileSelected }: MediaUploadProps) {
             
             {preview && file.type.startsWith("image/") && (
               <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={preview} alt="Preview" className="max-h-48 rounded-md object-contain" />
+                <Image src={preview} alt="Preview" width={400} height={192} unoptimized className="max-h-48 rounded-md object-contain" />
               </>
             )}
             

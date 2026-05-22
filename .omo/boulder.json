@@ -8,12 +8,20 @@
       "plan_name": "disparoswpp",
       "status": "active",
       "started_at": "2026-05-21T19:25:04.310Z",
-      "updated_at": "2026-05-22T02:39:00.004Z",
+      "updated_at": "2026-05-22T04:21:20.230Z",
       "session_ids": [
-        "ses_1b4462f74ffePrAhjYk1M4nFtm"
+        "ses_1b4462f74ffePrAhjYk1M4nFtm",
+        "ses_1b21d3d23ffe8Fgv6TopUnU1Lo",
+        "ses_1b21d0005ffegPaM60Y6KrWbth",
+        "ses_1b21cc6d2ffeVu2j06xHjU0ExM",
+        "ses_1b21c6ee8ffedFddVFKhyFF98P"
       ],
       "session_origins": {
-        "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct"
+        "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct",
+        "ses_1b21d3d23ffe8Fgv6TopUnU1Lo": "appended",
+        "ses_1b21d0005ffegPaM60Y6KrWbth": "appended",
+        "ses_1b21cc6d2ffeVu2j06xHjU0ExM": "appended",
+        "ses_1b21c6ee8ffedFddVFKhyFF98P": "appended"
       },
       "agent": "atlas",
       "task_sessions": {
@@ -21,12 +29,12 @@
           "task_key": "final-wave:f1",
           "task_label": "F1",
           "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
-          "session_id": "ses_1b276da7fffeCot5OFEZf5d7Bw",
+          "session_id": "ses_1b21806b3ffe7PzDZGisORdnRd",
           "agent": "Sisyphus-Junior",
-          "category": "quick",
+          "category": "unspecified-high",
           "started_at": "2026-05-21T19:35:18.324Z",
           "status": "running",
-          "updated_at": "2026-05-22T02:39:00.004Z"
+          "updated_at": "2026-05-22T04:21:20.230Z"
         }
       }
     }
@@ -34,12 +42,20 @@
   "active_plan": "/home/peubraw/projetos/disparoswpp/.omo/plans/disparoswpp.md",
   "started_at": "2026-05-21T19:25:04.310Z",
   "status": "active",
-  "updated_at": "2026-05-22T02:39:00.004Z",
+  "updated_at": "2026-05-22T04:21:20.230Z",
   "session_ids": [
-    "ses_1b4462f74ffePrAhjYk1M4nFtm"
+    "ses_1b4462f74ffePrAhjYk1M4nFtm",
+    "ses_1b21d3d23ffe8Fgv6TopUnU1Lo",
+    "ses_1b21d0005ffegPaM60Y6KrWbth",
+    "ses_1b21cc6d2ffeVu2j06xHjU0ExM",
+    "ses_1b21c6ee8ffedFddVFKhyFF98P"
   ],
   "session_origins": {
-    "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct"
+    "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct",
+    "ses_1b21d3d23ffe8Fgv6TopUnU1Lo": "appended",
+    "ses_1b21d0005ffegPaM60Y6KrWbth": "appended",
+    "ses_1b21cc6d2ffeVu2j06xHjU0ExM": "appended",
+    "ses_1b21c6ee8ffedFddVFKhyFF98P": "appended"
   },
   "plan_name": "disparoswpp",
   "task_sessions": {
@@ -47,12 +63,12 @@
       "task_key": "final-wave:f1",
       "task_label": "F1",
       "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
-      "session_id": "ses_1b276da7fffeCot5OFEZf5d7Bw",
+      "session_id": "ses_1b21806b3ffe7PzDZGisORdnRd",
       "agent": "Sisyphus-Junior",
-      "category": "quick",
+      "category": "unspecified-high",
       "started_at": "2026-05-21T19:35:18.324Z",
       "status": "running",
-      "updated_at": "2026-05-22T02:39:00.004Z"
+      "updated_at": "2026-05-22T04:21:20.230Z"
     }
   },
   "agent": "atlas"
