@@ -18,7 +18,7 @@ export function MessagesChart({ data }: MessagesChartProps) {
         <CardTitle>Envios vs Entregas (Últimos 7 dias)</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full">
+        <div className="h-[300px] w-full min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={data}
