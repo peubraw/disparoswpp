@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 export async function getCurrentUser() {
   const session = await auth();
   if (!session?.user?.id) {
-    redirect("/login");
+    redirect(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/login`);
   }
   return session.user as { id: string; email: string; name: string };
 }

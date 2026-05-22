@@ -46,7 +46,8 @@ export function QRCodeDialog({
       setExpired(false);
     });
 
-    fetch(`/api/instances/${instanceId}/qr`)
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+    fetch(`${basePath}/api/instances/${instanceId}/qr`)
       .then((r) => r.json() as Promise<QRResponse>)
       .then((data) => {
         setBase64(data.base64);
@@ -54,7 +55,7 @@ export function QRCodeDialog({
       .catch(() => {});
 
     intervalRef.current = setInterval(() => {
-      fetch(`/api/instances/${instanceId}/qr`)
+      fetch(`${basePath}/api/instances/${instanceId}/qr`)
         .then((r) => r.json() as Promise<StatusResponse>)
         .then((data) => {
           if (data.status === "CONNECTED") {
