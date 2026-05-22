@@ -71,8 +71,12 @@ export async function POST(req: NextRequest) {
     .map((row) => {
       const customFields: Record<string, string> = {};
       for (const [key, value] of Object.entries(row)) {
-        if (key !== phoneCol && key !== nameCol && key !== companyCol) {
-          customFields[key] = value;
+        if (key !== phoneCol && key !== nameCol) {
+          if (companyCol && key === companyCol) {
+            customFields["empresa"] = value;
+          } else {
+            customFields[key] = value;
+          }
         }
       }
       return {

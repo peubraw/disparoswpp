@@ -14,7 +14,7 @@ export async function processCampaignDispatch(job: Job<{ campaignId: string; use
   const { campaignId } = job.data;
 
   const campaign = await prisma.campaign.findFirst({
-    where: { id: campaignId },
+    where: { id: campaignId, userId },
     include: {
       waInstance: true,
       contactLists: {

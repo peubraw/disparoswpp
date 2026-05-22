@@ -16,7 +16,7 @@ export async function processScheduledCampaign(
   const { campaignId, userId } = job.data;
 
   const campaign = await prisma.campaign.findFirst({
-    where: { id: campaignId },
+    where: { id: campaignId, userId },
   });
 
   if (!campaign) {
