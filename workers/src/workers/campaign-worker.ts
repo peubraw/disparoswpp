@@ -11,7 +11,7 @@ const connection = new Redis(process.env.REDIS_URL ?? "redis://redis:6379", {
 const messageSendQueue = new Queue("message-send", { connection });
 
 export async function processCampaignDispatch(job: Job<{ campaignId: string; userId: string }>) {
-  const { campaignId } = job.data;
+  const { campaignId, userId } = job.data;
 
   const campaign = await prisma.campaign.findFirst({
     where: { id: campaignId, userId },
