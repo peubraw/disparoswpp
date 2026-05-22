@@ -91,7 +91,7 @@ services:
       EVOLUTION_API_KEY: ${EVOLUTION_API_KEY:-CHANGE_ME}
 
   evolution-api:
-    image: atendai/evolution-api:latest
+    image: atendai/evolution-api:v2.2.3
     ports:
       - "127.0.0.1:8081:8080"
     shm_size: "1g"
