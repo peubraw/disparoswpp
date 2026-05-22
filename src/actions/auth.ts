@@ -43,7 +43,7 @@ export async function loginUser(formData: FormData) {
     await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
-      redirectTo: "/dashboard",
+      redirectTo: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dashboard`,
     });
   } catch (error) {
     if (error instanceof AuthError) {
