@@ -45,10 +45,10 @@ export default async function RelatoriosPage() {
   const campaignsWithStats = campaigns.map((campaign) => {
     const total = campaign.messages.length;
     const sent = campaign.messages.filter((m) =>
-      [MessageStatus.SENT, MessageStatus.DELIVERED, MessageStatus.READ].includes(m.status)
+      ([MessageStatus.SENT, MessageStatus.DELIVERED, MessageStatus.READ] as MessageStatus[]).includes(m.status)
     ).length;
     const delivered = campaign.messages.filter((m) =>
-      [MessageStatus.DELIVERED, MessageStatus.READ].includes(m.status)
+      ([MessageStatus.DELIVERED, MessageStatus.READ] as MessageStatus[]).includes(m.status)
     ).length;
     const read = campaign.messages.filter((m) => m.status === MessageStatus.READ).length;
     const failed = campaign.messages.filter((m) => m.status === MessageStatus.FAILED).length;
