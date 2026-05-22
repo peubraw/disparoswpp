@@ -101,7 +101,7 @@ services:
       NODE_ENV: production
       DATABASE_ENABLED: "true"
       DATABASE_PROVIDER: postgresql
-      DATABASE_CONNECTION_URI: postgresql://${POSTGRES_USER:-disparos}:${POSTGRES_PASSWORD:-CHANGE_ME}@postgres:5432/evolution?schema=public
+      DATABASE_CONNECTION_URI: ${EVOLUTION_DB_URI:-postgresql://disparos:CHANGE_ME@postgres:5432/evolution?schema=public}
       REDIS_ENABLED: "false"
       LOG_LEVEL: ERROR
       LOG_COLOR: "false"
