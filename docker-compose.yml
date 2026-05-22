@@ -99,8 +99,9 @@ services:
       AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY:-EvolutionKey2025Secure}
       SERVER_URL: http://evolution-api:8080
       NODE_ENV: production
-      DATABASE_ENABLED: "false"
+      DATABASE_ENABLED: "true"
       DATABASE_PROVIDER: postgresql
+      DATABASE_CONNECTION_URI: postgresql://${POSTGRES_USER:-disparos}:${POSTGRES_PASSWORD:-CHANGE_ME}@postgres:5432/evolution?schema=public
       REDIS_ENABLED: "false"
       LOG_LEVEL: ERROR
       LOG_COLOR: "false"
