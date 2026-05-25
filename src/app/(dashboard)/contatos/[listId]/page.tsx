@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { prisma } from "@/lib/prisma";
+import { AddContactButton } from "@/components/contacts/add-contact-button";
+import { DeleteContactButton } from "@/components/contacts/delete-contact-button";
 
 const PAGE_SIZE = 50;
 
@@ -37,12 +39,15 @@ export default async function ContactListPage({ params, searchParams }: PageProp
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
-      <div className="flex items-center gap-3">
-        <Link href="/contatos" className="text-gray-500 hover:text-gray-700 text-sm">
-          ← Listas
-        </Link>
-        <h1 className="text-2xl font-bold text-gray-900">{list.name}</h1>
-        <span className="text-sm text-gray-500">({total.toLocaleString("pt-BR")} contatos)</span>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Link href="/contatos" className="text-gray-500 hover:text-gray-700 text-sm">
+            ← Listas
+          </Link>
+          <h1 className="text-2xl font-bold text-gray-900">{list.name}</h1>
+          <span className="text-sm text-gray-500">({total.toLocaleString("pt-BR")} contatos)</span>
+        </div>
+        <AddContactButton listId={listId} />
       </div>
 
       {contacts.length === 0 ? (
@@ -62,6 +67,7 @@ export default async function ContactListPage({ params, searchParams }: PageProp
                   <th className="px-4 py-3 text-left font-medium text-gray-600">Nome</th>
                   <th className="px-4 py-3 text-left font-medium text-gray-600">Campos extras</th>
                   <th className="px-4 py-3 text-left font-medium text-gray-600">Adicionado em</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-600">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,6 +90,9 @@ export default async function ContactListPage({ params, searchParams }: PageProp
                       </td>
                       <td className="px-4 py-3 text-gray-500">
                         {new Date(contact.createdAt).toLocaleDateString("pt-BR")}
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        <DeleteContactButton contactId={contact.id} listId={listId} />
                       </td>
                     </tr>
                   );

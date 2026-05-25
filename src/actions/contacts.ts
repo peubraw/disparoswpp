@@ -31,11 +31,40 @@ export async function deleteContactList(listId: string) {
   return { success: true };
 }
 
-export async function getContactLists() {
+export async function addContact(listId: string, phoneNumber: string, name?: string) {
   const user = await getCurrentUser();
-  return prisma.contactList.findMany({
-    where: { userId: user.id },
-    include: { _count: { select: { contacts: true } } },
-    orderBy: { createdAt: "desc" },
+
+  const list = await prisma.contactList.findFirst({
+    where: { id: listId, userId: user.id },
   });
+  if (!list) return { error: "Lista não encontrada." };
+
+  const cleaned = phoneNumber.replace(/\D/g, "");
+  if (!cleaned) return { error: "Telefone inválido." };
+
+  const existing = await prisma.contact.findFirst({
+    where: { contactListId: listId, phoneNumber: cleaned },
+  });
+  if (existing) return { error: "Contato já existe nesta lista." };
+
+  const contact = await prisma.contact.create({
+    data: { contactListId: listId, phoneNumber: cleaned, name: name?.trim() || null },
+  });
+
+  revalidatePath(`/contatos/${listId}`);
+  return { success: true, contact };
 }
+
+export async function deleteContact(contactId: string, listId: string) {
+  const user = await getCurrentUser();
+
+  const list = await prisma.contactList.findFirst({
+    where: { id: listId, userId: user.id },
+  });
+  if (!list) return { error: "Lista não encontrada." };
+
+  await prisma.contact.delete({ where: { id: contactId } });
+  revalidatePath(`/contatos/${listId}`);
+  return { success: true };
+}
+
