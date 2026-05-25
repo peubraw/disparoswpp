@@ -187,6 +187,8 @@ export function startCampaignWorker() {
   _worker = new Worker<DispatchCampaignJob>("message-send", processCampaign, {
     connection: redis,
     concurrency: 1,
+    lockDuration: 300000, // 5 minutos — evita lock expirar durante throttle longo
+    lockRenewTime: 60000, // renova a cada 1 minuto
   });
 
   _worker.on("completed", (job, result) => {
