@@ -6,6 +6,7 @@ import { messageSendQueue, campaignSchedulerQueue } from "@/lib/queues";
 import { CampaignStatus, WaInstanceStatus, MediaType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { evolutionClient } from "@/lib/evolution-client";
 
 const createCampaignSchema = z.object({
   name: z.string().min(1).max(100),
@@ -80,6 +81,20 @@ export async function startCampaign(campaignId: string) {
   });
 
   if (!campaign) return { error: "Campanha não encontrada." };
+
+  try {
+    const res = await evolutionClient.getInstanceStatus(campaign.waInstance.instanceName) as { instance?: { state?: string } };
+    const state = res?.instance?.state;
+    if (state === "open" && campaign.waInstance.status !== WaInstanceStatus.CONNECTED) {
+      await prisma.waInstance.update({
+        where: { id: campaign.waInstance.id },
+        data: { status: WaInstanceStatus.CONNECTED },
+      });
+      campaign.waInstance.status = WaInstanceStatus.CONNECTED;
+    }
+  } catch {
+  }
+
   if (campaign.waInstance.status !== WaInstanceStatus.CONNECTED) {
     return { error: "Instância não conectada. Conecte o WhatsApp antes de iniciar a campanha." };
   }
