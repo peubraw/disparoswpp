@@ -1,12 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { startCampaign, pauseCampaign, cancelCampaign } from "@/actions/campaigns";
 import { CampaignStatus, MessageStatus } from "@prisma/client";
+import { CampaignActions } from "@/components/campaigns/campaign-actions";
 
 function getStatusBadge(status: CampaignStatus) {
   switch (status) {
@@ -71,10 +70,6 @@ export default async function CampanhaDetailPage({ params }: { params: { id: str
 
   const progress = total > 0 ? Math.round((sent / total) * 100) : 0;
 
-  const startAction = async (): Promise<void> => { "use server"; await startCampaign(campaign.id); };
-  const pauseAction = async (): Promise<void> => { "use server"; await pauseCampaign(campaign.id); };
-  const cancelAction = async (): Promise<void> => { "use server"; await cancelCampaign(campaign.id); };
-
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <div className="flex items-center justify-between space-y-2">
@@ -87,23 +82,7 @@ export default async function CampanhaDetailPage({ params }: { params: { id: str
             </span>
           </div>
         </div>
-        <div className="flex gap-2">
-          {(campaign.status === "DRAFT" || campaign.status === "PAUSED") && (
-            <form action={startAction}>
-              <Button type="submit">Iniciar</Button>
-            </form>
-          )}
-          {campaign.status === "RUNNING" && (
-            <form action={pauseAction}>
-              <Button type="submit" variant="secondary">Pausar</Button>
-            </form>
-          )}
-          {["RUNNING", "PAUSED", "SCHEDULED"].includes(campaign.status) && (
-            <form action={cancelAction}>
-              <Button type="submit" variant="destructive">Cancelar</Button>
-            </form>
-          )}
-        </div>
+        <CampaignActions campaignId={campaign.id} status={campaign.status} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
