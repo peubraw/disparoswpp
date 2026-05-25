@@ -73,6 +73,18 @@ export async function deleteInstance(instanceId: string) {
     await evolutionClient.deleteInstance(instance.instanceName);
   } catch (_) {}
 
+  const campaigns = await prisma.campaign.findMany({
+    where: { waInstanceId: instanceId },
+    select: { id: true },
+  });
+  const campaignIds = campaigns.map((c) => c.id);
+
+  if (campaignIds.length > 0) {
+    await prisma.message.deleteMany({ where: { campaignId: { in: campaignIds } } });
+    await prisma.campaignContactList.deleteMany({ where: { campaignId: { in: campaignIds } } });
+    await prisma.campaign.deleteMany({ where: { id: { in: campaignIds } } });
+  }
+
   await prisma.waInstance.delete({ where: { id: instanceId } });
   revalidatePath("/instancias");
   return { success: true };
