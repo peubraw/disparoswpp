@@ -17,7 +17,6 @@ type QRCodeDialogProps = {
 };
 
 type QRResponse = { base64: string; code: string };
-type StatusResponse = { status: string };
 
 export function QRCodeDialog({
   instanceId,
@@ -47,24 +46,28 @@ export function QRCodeDialog({
     });
 
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-    fetch(`${basePath}/api/instances/${instanceId}/qr`)
-      .then((r) => r.json() as Promise<QRResponse>)
-      .then((data) => {
-        setBase64(data.base64);
-      })
-      .catch(() => {});
 
-    intervalRef.current = setInterval(() => {
-      fetch(`${basePath}/api/instances/${instanceId}/qr`)
-        .then((r) => r.json() as Promise<StatusResponse>)
-        .then((data) => {
-          if (data.status === "CONNECTED") {
-            clearTimers();
-            onOpenChange(false);
-          }
-        })
-        .catch(() => {});
-    }, 3000);
+    async function fetchQR() {
+      try {
+        const r = await fetch(`${basePath}/api/instances/${instanceId}/qr`);
+        const data = await r.json() as QRResponse & { error?: string };
+        if (data.base64) {
+          setBase64(data.base64);
+          return true;
+        }
+      } catch {}
+      return false;
+    }
+
+    fetchQR().then((ok) => {
+      if (!ok) {
+        const retryInterval = setInterval(async () => {
+          const success = await fetchQR();
+          if (success) clearInterval(retryInterval);
+        }, 3000);
+        intervalRef.current = retryInterval;
+      }
+    });
 
     timeoutRef.current = setTimeout(() => {
       clearTimers();
