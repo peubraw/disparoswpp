@@ -1,5 +1,5 @@
 import { Worker, Job } from "bullmq";
-import { redis } from "@/lib/redis";
+import Redis from "ioredis";
 import { prisma } from "@/lib/prisma";
 import { evolutionClient } from "@/lib/evolution-client";
 import { CampaignStatus, MessageStatus, MediaType } from "@prisma/client";
@@ -184,11 +184,16 @@ let _worker: Worker | undefined;
 export function startCampaignWorker() {
   if (_worker) return _worker;
 
+  const workerRedis = new Redis(process.env.REDIS_URL ?? "redis://localhost:6379", {
+    maxRetriesPerRequest: null,
+    enableReadyCheck: false,
+  });
+
   _worker = new Worker<DispatchCampaignJob>("message-send", processCampaign, {
-    connection: redis,
+    connection: workerRedis,
     concurrency: 1,
-    lockDuration: 300000, // 5 minutos — evita lock expirar durante throttle longo
-    lockRenewTime: 60000, // renova a cada 1 minuto
+    lockDuration: 300000,
+    lockRenewTime: 60000,
   });
 
   _worker.on("completed", (job, result) => {
