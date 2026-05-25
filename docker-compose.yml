@@ -108,7 +108,8 @@ services:
       REDIS_ENABLED: "false"
       LOG_LEVEL: ERROR
       LOG_COLOR: "false"
-      LOG_BAILEYS: "false"
+      LOG_BAILEYS: "error"
+      CONFIG_SESSION_PHONE_VERSION: "2.3000.1035194821"
       DEL_INSTANCE: "false"
       WEBHOOK_GLOBAL_ENABLED: "false"
     volumes:

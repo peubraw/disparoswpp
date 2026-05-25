@@ -61,7 +61,7 @@ export class EvolutionClient {
   async getQRCode(name: string): Promise<EvolutionQRCode> {
     return this.request<EvolutionQRCode>({
       method: "GET",
-      url: `/instance/qrcode/${encodeURIComponent(name)}`,
+      url: `/instance/connect/${encodeURIComponent(name)}`,
     });
   }
 
