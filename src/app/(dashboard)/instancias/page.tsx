@@ -25,9 +25,9 @@ export default async function InstanciasPage() {
 
         let phoneNumber = instance.phoneNumber;
         if (newStatus === WaInstanceStatus.CONNECTED && !phoneNumber) {
-          const all = await evolutionClient.request<Array<{ ownerJid?: string }>>({ method: "GET", url: "/instance/fetchInstances" });
-          const found = Array.isArray(all) ? all.find((i: { name?: string }) => i.name === instance.instanceName) : null;
-          const jid = (found as { ownerJid?: string } | null)?.ownerJid;
+          const all = await evolutionClient.fetchInstances();
+          const found = all.find((i) => i.name === instance.instanceName);
+          const jid = found?.ownerJid;
           if (jid) phoneNumber = jid.replace("@s.whatsapp.net", "");
         }
 

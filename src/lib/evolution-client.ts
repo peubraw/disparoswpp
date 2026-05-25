@@ -95,6 +95,13 @@ export class EvolutionClient {
       data: { url, events },
     });
   }
+
+  async fetchInstances(): Promise<Array<{ name?: string; ownerJid?: string; connectionStatus?: string }>> {
+    return this.request<Array<{ name?: string; ownerJid?: string; connectionStatus?: string }>>({
+      method: "GET",
+      url: "/instance/fetchInstances",
+    });
+  }
 }
 
 export const evolutionClient = new EvolutionClient(
