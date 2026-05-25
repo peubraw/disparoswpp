@@ -2,14 +2,40 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { CampaignWizard } from "./campaign-wizard";
 import { WaInstanceStatus } from "@prisma/client";
+import { evolutionClient } from "@/lib/evolution-client";
 
 export default async function NovaCampanhaPage() {
   const user = await getCurrentUser();
 
-  const instances = await prisma.waInstance.findMany({
-    where: { userId: user.id, status: WaInstanceStatus.CONNECTED },
-    select: { id: true, instanceName: true },
+  const allInstances = await prisma.waInstance.findMany({
+    where: { userId: user.id },
+    select: { id: true, instanceName: true, status: true, phoneNumber: true },
   });
+
+  await Promise.allSettled(
+    allInstances.map(async (instance) => {
+      try {
+        const res = await evolutionClient.getInstanceStatus(instance.instanceName) as { instance?: { state?: string } };
+        const state = res?.instance?.state;
+        let newStatus: WaInstanceStatus = WaInstanceStatus.CONNECTING;
+        if (state === "open") newStatus = WaInstanceStatus.CONNECTED;
+        else if (state === "close") newStatus = WaInstanceStatus.DISCONNECTED;
+
+        if (newStatus !== instance.status) {
+          await prisma.waInstance.update({
+            where: { id: instance.id },
+            data: { status: newStatus },
+          });
+          instance.status = newStatus;
+        }
+      } catch {
+      }
+    })
+  );
+
+  const instances = allInstances
+    .filter((i) => i.status === WaInstanceStatus.CONNECTED)
+    .map((i) => ({ id: i.id, instanceName: i.instanceName }));
 
   const contactLists = await prisma.contactList.findMany({
     where: { userId: user.id },
