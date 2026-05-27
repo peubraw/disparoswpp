@@ -1331,22 +1331,22 @@ Wave FINAL (após TODAS as tasks — 4 revisores em paralelo):
 
 > 4 revisores em paralelo. TODOS devem APROVAR. Apresentar resultados consolidados e aguardar "okay" explícito antes de concluir.
 
-- [ ] F1. **Auditoria de Conformidade do Plano** — `oracle`
+- [x] F1. **Auditoria de Conformidade do Plano** — `oracle`
   Ler o plano inteiro. Para cada "Must Have": verificar que implementação existe (ler arquivo, curl endpoint, rodar comando). Para cada "Must NOT Have": buscar padrões proibidos no codebase — rejeitar com file:line se encontrado. Verificar que arquivos de evidência existem em .omo/evidence/. Comparar entregáveis com o plano.
   Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
   **Acceptance Criteria**: Output final deve conter `VERDICT: APPROVE`. Qualquer `REJECT` bloqueia conclusão.
 
-- [ ] F2. **Revisão de Qualidade de Código** — `unspecified-high`
+- [x] F2. **Revisão de Qualidade de Código** — `unspecified-high`
   Rodar `npx tsc --noEmit` + `npm run lint`. Revisar todos os arquivos alterados: `as any`/`@ts-ignore`, catches vazios, console.log em prod, código comentado, imports não usados. Verificar AI slop: comentários excessivos, sobre-abstração, nomes genéricos (data/result/item/temp).
   Output: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Files [N clean/N issues] | VERDICT`
   **Acceptance Criteria**: `Build [PASS]` + `Lint [PASS]` + `VERDICT: PASS`. Qualquer `FAIL` bloqueia.
 
-- [ ] F3. **QA Manual Real End-to-End** — `unspecified-high` + skill `playwright`
+- [x] F3. **QA Manual Real End-to-End** — `unspecified-high` + skill `playwright`
   Iniciar do estado limpo. Executar TODOS os cenários QA de TODAS as tasks — seguir passos exatos, capturar evidências. Testar integração cross-task (features trabalhando juntas). Salvar em `.omo/evidence/final-qa/`.
   Output: `Scenarios [N/N pass] | Integration [N/N] | Edge Cases [N tested] | VERDICT`
   **Acceptance Criteria**: `Scenarios [N/N pass]` (100%) + `VERDICT: PASS`. Qualquer cenário com FAIL bloqueia.
 
-- [ ] F4. **Verificação de Fidelidade de Escopo** — `deep`
+- [x] F4. **Verificação de Fidelidade de Escopo** — `deep`
   Para cada task: ler "What to do", ler diff real (git log/diff). Verificar 1:1 — tudo no spec foi construído (sem missing), nada além do spec foi construído (sem creep). Checar "Must NOT do". Detectar contaminação cross-task. Flaggar mudanças sem origem.
   Output: `Tasks [N/N compliant] | Contamination [CLEAN/N issues] | Unaccounted [CLEAN/N files] | VERDICT`
   **Acceptance Criteria**: `Tasks [N/N compliant]` + `Contamination [CLEAN]` + `VERDICT: COMPLIANT`. Qualquer `NON-COMPLIANT` bloqueia.

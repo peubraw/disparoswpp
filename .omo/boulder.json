@@ -6,22 +6,32 @@
       "work_id": "disparoswpp-7492f7ba",
       "active_plan": "/home/peubraw/projetos/disparoswpp/.omo/plans/disparoswpp.md",
       "plan_name": "disparoswpp",
-      "status": "active",
+      "status": "completed",
       "started_at": "2026-05-21T19:25:04.310Z",
-      "updated_at": "2026-05-22T04:21:20.230Z",
+      "updated_at": "2026-05-22T04:26:48.366Z",
       "session_ids": [
         "ses_1b4462f74ffePrAhjYk1M4nFtm",
         "ses_1b21d3d23ffe8Fgv6TopUnU1Lo",
         "ses_1b21d0005ffegPaM60Y6KrWbth",
         "ses_1b21cc6d2ffeVu2j06xHjU0ExM",
-        "ses_1b21c6ee8ffedFddVFKhyFF98P"
+        "ses_1b21c6ee8ffedFddVFKhyFF98P",
+        "ses_1b2139b9effeXbpkck21kNqx0b",
+        "ses_1b21368abffeNk3ACRvEhxFDxk",
+        "ses_1b2132cefffexp3B2473BOXoMl",
+        "ses_1b211af9dffejBiN0oGHaRxPDX",
+        "ses_1b2118435ffegd5sN4s2GaaFUG"
       ],
       "session_origins": {
         "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct",
         "ses_1b21d3d23ffe8Fgv6TopUnU1Lo": "appended",
         "ses_1b21d0005ffegPaM60Y6KrWbth": "appended",
         "ses_1b21cc6d2ffeVu2j06xHjU0ExM": "appended",
-        "ses_1b21c6ee8ffedFddVFKhyFF98P": "appended"
+        "ses_1b21c6ee8ffedFddVFKhyFF98P": "appended",
+        "ses_1b2139b9effeXbpkck21kNqx0b": "appended",
+        "ses_1b21368abffeNk3ACRvEhxFDxk": "appended",
+        "ses_1b2132cefffexp3B2473BOXoMl": "appended",
+        "ses_1b211af9dffejBiN0oGHaRxPDX": "appended",
+        "ses_1b2118435ffegd5sN4s2GaaFUG": "appended"
       },
       "agent": "atlas",
       "task_sessions": {
@@ -29,33 +39,46 @@
           "task_key": "final-wave:f1",
           "task_label": "F1",
           "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
-          "session_id": "ses_1b21806b3ffe7PzDZGisORdnRd",
-          "agent": "Sisyphus-Junior",
-          "category": "unspecified-high",
+          "session_id": "ses_1b2118435ffegd5sN4s2GaaFUG",
+          "agent": "oracle",
           "started_at": "2026-05-21T19:35:18.324Z",
-          "status": "running",
-          "updated_at": "2026-05-22T04:21:20.230Z"
+          "status": "completed",
+          "updated_at": "2026-05-22T04:25:57.781Z",
+          "ended_at": "2026-05-22T04:25:57.781Z",
+          "elapsed_ms": 31839457
         }
-      }
+      },
+      "ended_at": "2026-05-22T04:26:48.366Z",
+      "elapsed_ms": 32504056
     }
   },
   "active_plan": "/home/peubraw/projetos/disparoswpp/.omo/plans/disparoswpp.md",
   "started_at": "2026-05-21T19:25:04.310Z",
-  "status": "active",
-  "updated_at": "2026-05-22T04:21:20.230Z",
+  "status": "completed",
+  "updated_at": "2026-05-22T04:26:48.366Z",
   "session_ids": [
     "ses_1b4462f74ffePrAhjYk1M4nFtm",
     "ses_1b21d3d23ffe8Fgv6TopUnU1Lo",
     "ses_1b21d0005ffegPaM60Y6KrWbth",
     "ses_1b21cc6d2ffeVu2j06xHjU0ExM",
-    "ses_1b21c6ee8ffedFddVFKhyFF98P"
+    "ses_1b21c6ee8ffedFddVFKhyFF98P",
+    "ses_1b2139b9effeXbpkck21kNqx0b",
+    "ses_1b21368abffeNk3ACRvEhxFDxk",
+    "ses_1b2132cefffexp3B2473BOXoMl",
+    "ses_1b211af9dffejBiN0oGHaRxPDX",
+    "ses_1b2118435ffegd5sN4s2GaaFUG"
   ],
   "session_origins": {
     "ses_1b4462f74ffePrAhjYk1M4nFtm": "direct",
     "ses_1b21d3d23ffe8Fgv6TopUnU1Lo": "appended",
     "ses_1b21d0005ffegPaM60Y6KrWbth": "appended",
     "ses_1b21cc6d2ffeVu2j06xHjU0ExM": "appended",
-    "ses_1b21c6ee8ffedFddVFKhyFF98P": "appended"
+    "ses_1b21c6ee8ffedFddVFKhyFF98P": "appended",
+    "ses_1b2139b9effeXbpkck21kNqx0b": "appended",
+    "ses_1b21368abffeNk3ACRvEhxFDxk": "appended",
+    "ses_1b2132cefffexp3B2473BOXoMl": "appended",
+    "ses_1b211af9dffejBiN0oGHaRxPDX": "appended",
+    "ses_1b2118435ffegd5sN4s2GaaFUG": "appended"
   },
   "plan_name": "disparoswpp",
   "task_sessions": {
@@ -63,13 +86,16 @@
       "task_key": "final-wave:f1",
       "task_label": "F1",
       "task_title": "**Auditoria de Conformidade do Plano** — `oracle`",
-      "session_id": "ses_1b21806b3ffe7PzDZGisORdnRd",
-      "agent": "Sisyphus-Junior",
-      "category": "unspecified-high",
+      "session_id": "ses_1b2118435ffegd5sN4s2GaaFUG",
+      "agent": "oracle",
       "started_at": "2026-05-21T19:35:18.324Z",
-      "status": "running",
-      "updated_at": "2026-05-22T04:21:20.230Z"
+      "status": "completed",
+      "updated_at": "2026-05-22T04:25:57.781Z",
+      "ended_at": "2026-05-22T04:25:57.781Z",
+      "elapsed_ms": 31839457
     }
   },
-  "agent": "atlas"
+  "agent": "atlas",
+  "ended_at": "2026-05-22T04:26:48.366Z",
+  "elapsed_ms": 32504056
 }
