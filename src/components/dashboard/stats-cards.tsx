@@ -62,7 +62,7 @@ export function StatsCards({ stats }: StatsCardsProps) {
       <Card className={cardClasses}>
         <div className="absolute top-0 right-0 w-16 h-16 bg-[radial-gradient(circle_at_top_right,rgba(37,211,102,0.1)_0,transparent_70%)] pointer-events-none"></div>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className={titleClasses}>TAXA DE ENTREGA</CardTitle>
+          <CardTitle className={titleClasses}>TAXA DE ENVIO</CardTitle>
           <Zap className={iconClasses} />
         </CardHeader>
         <CardContent>

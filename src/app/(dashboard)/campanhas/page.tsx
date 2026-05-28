@@ -90,7 +90,7 @@ export default async function CampanhasPage() {
                   <TableHead>Status</TableHead>
                   <TableHead className="text-center">Total</TableHead>
                   <TableHead className="text-center">Enviadas</TableHead>
-                  <TableHead className="text-center">Recebidas</TableHead>
+                  <TableHead className="text-center">Entregues</TableHead>
                   <TableHead>Progresso</TableHead>
                   <TableHead>Criada em</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
