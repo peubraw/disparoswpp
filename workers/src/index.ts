@@ -1,6 +1,7 @@
 import { Worker } from "bullmq";
 import Redis from "ioredis";
 import { processCampaignDispatch } from "./workers/campaign-worker";
+import { processFinalCampaign } from "./workers/finalize-campaign-worker";
 import { processSendMessage } from "./workers/message-worker";
 import { processScheduledCampaign } from "./workers/scheduled-campaign-worker";
 
@@ -13,6 +14,9 @@ const messageSendWorker = new Worker(
   async (job) => {
     if (job.name === "dispatch-campaign") {
       return processCampaignDispatch(job as Parameters<typeof processCampaignDispatch>[0]);
+    }
+    if (job.name === "finalize-campaign") {
+      return processFinalCampaign(job as Parameters<typeof processFinalCampaign>[0]);
     }
     if (job.name === "send-message") {
       return processSendMessage(job as Parameters<typeof processSendMessage>[0]);

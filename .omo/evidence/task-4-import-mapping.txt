@@ -1,0 +1,6 @@
+TypeScript check: PASS
+Task 4: contacts import mapping
+- mappingRaw parsed from FormData
+- mapping uses column indices with header:false
+- auto-detection path preserved when mapping absent
+- evidence saved after successful tsc
