@@ -1,0 +1,7 @@
+Task 5 evidence
+
+- Modified: src/components/contacts/csv-upload.tsx
+- ColumnMapper integrated for CSV header mapping
+- Mapping converted from header names to string column indices
+- mapping appended to FormData as JSON before import request
+- Typecheck: npx tsc --noEmit (passed)

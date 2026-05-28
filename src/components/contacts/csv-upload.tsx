@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+
+import { ColumnMapper } from "./column-mapper";
 
 interface ImportResult {
   imported: number;
@@ -12,29 +14,6 @@ interface CsvUploadProps {
   listId: string;
   onSuccess: (result: { imported: number; duplicates: number }) => void;
 }
-
-const PHONE_KEYS = ["telefone", "phone", "phonenumber", "numero", "celular", "mobile"];
-const NAME_KEYS = ["nome", "name"];
-const COMPANY_KEYS = ["empresa", "company", "compania"];
-
-function detectMapping(headers: string[]): Record<string, string> {
-  const mapping: Record<string, string> = {};
-  for (const h of headers) {
-    const lower = h.toLowerCase().trim().replace(/\s/g, "");
-    if (PHONE_KEYS.includes(lower)) mapping[h] = "phoneNumber";
-    else if (NAME_KEYS.includes(lower)) mapping[h] = "name";
-    else if (COMPANY_KEYS.includes(lower)) mapping[h] = "company";
-    else mapping[h] = "customField";
-  }
-  return mapping;
-}
-
-const FIELD_LABELS: Record<string, string> = {
-  phoneNumber: "Telefone",
-  name: "Nome",
-  company: "Empresa",
-  customField: "Campo personalizado",
-};
 
 export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,10 +31,24 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
       const firstLine = text.split("\n")[0] ?? "";
       const cols = firstLine.split(",").map((c) => c.trim().replace(/^"|"$/g, ""));
       setHeaders(cols);
-      setMapping(detectMapping(cols));
+      setMapping({});
     };
     reader.readAsText(f);
   }
+
+  const handleMappingChange = useCallback(
+    (nameMapping: Record<string, string>) => {
+      const indexMapping: Record<string, string> = {};
+
+      for (const [headerName, fieldName] of Object.entries(nameMapping)) {
+        const idx = headers.indexOf(headerName);
+        if (idx >= 0) indexMapping[String(idx)] = fieldName;
+      }
+
+      setMapping(indexMapping);
+    },
+    [headers],
+  );
 
   function handleFile(f: File) {
     setFile(f);
@@ -78,6 +71,7 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("listId", listId);
+      formData.append("mapping", JSON.stringify(mapping));
       const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
       const res = await fetch(`${basePath}/api/contacts/import`, { method: "POST", body: formData });
       const data = (await res.json()) as ImportResult & { error?: string };
@@ -122,40 +116,7 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
         )}
       </div>
 
-      {headers.length > 0 && (
-        <div className="border border-[rgba(37,211,102,0.15)] rounded-sm overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-[rgba(37,211,102,0.05)] border-b border-[rgba(37,211,102,0.15)]">
-              <tr>
-                <th className="px-4 py-2 text-left font-heading text-xs tracking-widest uppercase text-[#25D366]">Coluna CSV</th>
-                <th className="px-4 py-2 text-left font-heading text-xs tracking-widest uppercase text-[#25D366]">Mapeado para</th>
-              </tr>
-            </thead>
-            <tbody>
-              {headers.map((h) => (
-                <tr key={h} className="border-t border-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.04)] transition-colors">
-                  <td className="px-4 py-2 text-[#e8f5e9]">{h}</td>
-                  <td className="px-4 py-2">
-                    <span
-                      className={`inline-block px-2 py-0.5 rounded-sm font-heading tracking-widest uppercase text-[10px] ${
-                        mapping[h] === "phoneNumber"
-                          ? "bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]"
-                          : mapping[h] === "name"
-                          ? "bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]"
-                          : mapping[h] === "company"
-                          ? "bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]"
-                          : "bg-[rgba(232,245,233,0.1)] text-[#e8f5e9] border border-[rgba(37,211,102,0.15)]"
-                      }`}
-                    >
-                      {FIELD_LABELS[mapping[h]] ?? mapping[h]}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {headers.length > 0 && <ColumnMapper headers={headers} onMappingChange={handleMappingChange} />}
 
       {error && (
         <p className="text-sm text-[#ef4444] bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-sm px-3 py-2">{error}</p>
