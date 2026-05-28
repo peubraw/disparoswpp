@@ -68,8 +68,9 @@ export async function POST(req: NextRequest) {
     }
 
     const nameIndex = Object.entries(mapping).find(([, field]) => field === "name")?.[0];
+    const startRow = isHeaderRow(parsed.data[0] ?? [], Number(phoneIndex), Number(nameIndex ?? -1));
     const contacts = parsed.data
-      .slice(1)
+      .slice(startRow ? 1 : 0)
       .filter((row) => row[Number(phoneIndex)])
       .map((row) => {
         const customFields: Record<string, string> = {};
@@ -91,7 +92,7 @@ export async function POST(req: NextRequest) {
         return {
           contactListId: listId,
           phoneNumber: normalizePhone(row[Number(phoneIndex)] ?? ""),
-          name: nameIndex ? (row[Number(nameIndex)] ?? null) : null,
+          name: nameIndex !== undefined ? (row[Number(nameIndex)] ?? null) : null,
           customFields: Object.keys(customFields).length > 0 ? customFields : {},
         };
       });
@@ -160,4 +161,14 @@ export async function POST(req: NextRequest) {
   }
 
   return NextResponse.json({ imported, duplicates, errors });
+}
+
+function isHeaderRow(row: string[], phonePos: number, namePos: number): boolean {
+  const phoneCell = (row[phonePos] ?? "").toLowerCase().trim();
+  const nameCell = namePos >= 0 ? (row[namePos] ?? "").toLowerCase().trim() : "";
+
+  return (
+    ["telefone", "phone", "phonenumber", "numero", "celular", "mobile"].includes(phoneCell) ||
+    ["nome", "name"].includes(nameCell)
+  );
 }
