@@ -71,6 +71,50 @@ export async function deleteContact(contactId: string, listId: string) {
   return { success: true };
 }
 
+const importGroupsSchema = z.object({
+  listId: z.string().min(1),
+  instanceName: z.string().min(1),
+});
+
+export async function importGroupsFromInstance(listId: string, instanceName: string) {
+  const user = await getCurrentUser();
+
+  const parsed = importGroupsSchema.safeParse({ listId, instanceName });
+  if (!parsed.success) return { error: "Dados inválidos." };
+
+  const list = await prisma.contactList.findFirst({
+    where: { id: parsed.data.listId, userId: user.id },
+  });
+  if (!list) return { error: "Lista não encontrada." };
+
+  let groups: Array<{ id: string; subject: string }>;
+  try {
+    groups = await evolutionClient.fetchGroups(parsed.data.instanceName);
+  } catch {
+    return { error: "Não foi possível buscar grupos. Verifique se a instância está conectada." };
+  }
+
+  if (groups.length === 0) return { imported: 0, total: 0 };
+
+  let imported = 0;
+  for (const group of groups) {
+    if (!group.id) continue;
+    try {
+      await prisma.contact.upsert({
+        where: { contactListId_phoneNumber: { contactListId: parsed.data.listId, phoneNumber: group.id } },
+        update: group.subject ? { name: group.subject } : {},
+        create: { contactListId: parsed.data.listId, phoneNumber: group.id, name: group.subject || null },
+      });
+      imported++;
+    } catch (_) {
+      void _;
+    }
+  }
+
+  revalidatePath(`/contatos/${parsed.data.listId}`);
+  return { imported, total: groups.length };
+}
+
 const importFromInstanceSchema = z.object({
   listId: z.string().min(1),
   instanceName: z.string().min(1),

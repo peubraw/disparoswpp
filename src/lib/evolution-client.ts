@@ -103,6 +103,15 @@ export class EvolutionClient {
     });
   }
 
+  async fetchGroups(
+    instanceName: string,
+  ): Promise<Array<{ id: string; subject: string }>> {
+    return this.request<Array<{ id: string; subject: string }>>({
+      method: "GET",
+      url: `/group/fetchAllGroups/${encodeURIComponent(instanceName)}?getParticipants=false`,
+    });
+  }
+
   async fetchContacts(
     instanceName: string,
   ): Promise<Array<{ remoteJid: string; pushName: string | null }>> {
