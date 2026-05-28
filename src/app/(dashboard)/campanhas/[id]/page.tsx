@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { CampaignStatus, MessageStatus } from "@prisma/client";
+import { CampaignStatus, MessageStatus, MediaType } from "@prisma/client";
 import { CampaignActions } from "@/components/campaigns/campaign-actions";
 
 function getStatusBadge(status: CampaignStatus) {
@@ -141,6 +141,25 @@ export default async function CampanhaDetailPage({ params }: { params: Promise<{
               <div className="rounded-md bg-muted p-3 whitespace-pre-wrap">
                 {campaign.messageTemplate}
               </div>
+              {campaign.mediaUrl && campaign.mediaType !== MediaType.NONE && (
+                <div className="pt-2 space-y-1">
+                  <span className="text-muted-foreground text-xs uppercase tracking-widest font-heading">Arquivo anexado:</span>
+                  {campaign.mediaType === MediaType.IMAGE && (
+                    <img src={campaign.mediaUrl} alt="Imagem da campanha" className="max-w-xs rounded-md border border-[rgba(37,211,102,0.2)]" />
+                  )}
+                  {campaign.mediaType === MediaType.VIDEO && (
+                    <video src={campaign.mediaUrl} controls className="max-w-xs rounded-md border border-[rgba(37,211,102,0.2)]" />
+                  )}
+                  {campaign.mediaType === MediaType.AUDIO && (
+                    <audio src={campaign.mediaUrl} controls className="w-full" />
+                  )}
+                  {campaign.mediaType === MediaType.DOCUMENT && (
+                    <a href={campaign.mediaUrl} target="_blank" rel="noreferrer" className="text-[#25D366] underline text-sm font-mono">
+                      📄 Abrir documento
+                    </a>
+                  )}
+                </div>
+              )}
               <div className="flex justify-between pt-2">
                 <span className="text-muted-foreground">Intervalo:</span>
                 <span>{campaign.throttleDelay / 1000}s</span>

@@ -64,7 +64,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     prisma.message.findMany({
       where: {
         campaign: { userId },
-        sentAt: { gte: todayStart, lte: todayEnd },
+        createdAt: { gte: todayStart, lte: todayEnd },
       },
       select: { status: true },
     }),
@@ -85,16 +85,16 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     prisma.message.findMany({
       where: {
         campaign: { userId },
-        sentAt: { gte: sevenDaysAgo },
+        createdAt: { gte: sevenDaysAgo },
       },
-      select: { status: true, sentAt: true },
+      select: { status: true, createdAt: true },
     }),
   ]);
 
   const connectedInstances = instances.filter(i => i.status === WaInstanceStatus.CONNECTED).length;
+  const nonPendingToday = messagesToday.filter(m => m.status !== MessageStatus.PENDING).length;
   const sentToday = messagesToday.filter(m => m.status !== MessageStatus.FAILED && m.status !== MessageStatus.PENDING).length;
-  const deliveredToday = messagesToday.filter(m => m.status === MessageStatus.DELIVERED || m.status === MessageStatus.READ).length;
-  const deliveryRateToday = sentToday > 0 ? Math.round((deliveredToday / sentToday) * 100) : 0;
+  const deliveryRateToday = nonPendingToday > 0 ? Math.round((sentToday / nonPendingToday) * 100) : 0;
 
   // Build chart data - group by date
   const chartMap = new Map<string, { sent: number; delivered: number }>();
@@ -105,8 +105,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     chartMap.set(key, { sent: 0, delivered: 0 });
   }
   for (const msg of last7DaysMessages) {
-    if (!msg.sentAt) continue;
-    const key = msg.sentAt.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+    const key = msg.createdAt.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
     const entry = chartMap.get(key);
     if (!entry) continue;
     if (msg.status !== MessageStatus.PENDING && msg.status !== MessageStatus.FAILED) entry.sent++;
