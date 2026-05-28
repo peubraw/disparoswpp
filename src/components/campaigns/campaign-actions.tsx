@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { startCampaign, pauseCampaign, resumeCampaign, cancelCampaign, deleteCampaign } from "@/actions/campaigns";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog, shouldSkipConfirm } from "@/components/ui/confirm-dialog";
 
 interface Props {
   campaignId: string;
@@ -77,13 +78,15 @@ interface DeleteProps {
   status: string;
 }
 
+const DELETE_CAMPAIGN_KEY = "skipDeleteCampaignConfirm";
+
 export function DeleteCampaignButton({ campaignId, status }: DeleteProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const router = useRouter();
 
   async function handleDelete() {
-    if (!confirm("Tem certeza que deseja apagar esta campanha? Esta ação não pode ser desfeita.")) return;
     setLoading(true);
     setError(null);
     const result = await deleteCampaign(campaignId);
@@ -95,17 +98,36 @@ export function DeleteCampaignButton({ campaignId, status }: DeleteProps) {
     router.refresh();
   }
 
+  function handleClick() {
+    if (shouldSkipConfirm(DELETE_CAMPAIGN_KEY)) {
+      handleDelete();
+    } else {
+      setDialogOpen(true);
+    }
+  }
+
   return (
     <div className="inline-flex flex-col items-end gap-1">
       <Button
         variant="destructive"
         size="sm"
         disabled={loading || status === "RUNNING"}
-        onClick={handleDelete}
+        onClick={handleClick}
       >
         {loading ? "Apagando..." : "Apagar"}
       </Button>
       {error && <p className="text-xs text-red-600">{error}</p>}
+
+      <ConfirmDialog
+        open={dialogOpen}
+        title="Apagar campanha?"
+        description="Esta ação não pode ser desfeita. A campanha e todas as suas mensagens serão removidas permanentemente."
+        confirmLabel="Apagar"
+        cancelLabel="Cancelar"
+        storageKey={DELETE_CAMPAIGN_KEY}
+        onConfirm={() => { setDialogOpen(false); handleDelete(); }}
+        onCancel={() => setDialogOpen(false)}
+      />
     </div>
   );
 }

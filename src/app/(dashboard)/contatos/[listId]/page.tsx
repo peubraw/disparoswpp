@@ -91,7 +91,7 @@ export default async function ContactListPage({ params, searchParams }: PageProp
                     !Array.isArray(contact.customFields)
                       ? (contact.customFields as Record<string, string>)
                       : {};
-                  const customEntries = Object.entries(custom).filter(([, v]) => v);
+                  const customEntries = Object.entries(custom).filter(([k, v]) => v && k !== "whatsappValid");
                   return (
                     <tr key={contact.id} className="border-t border-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.04)] transition-colors">
                       <td className="px-4 py-3 font-mono text-[#e8f5e9]">{contact.phoneNumber}</td>
