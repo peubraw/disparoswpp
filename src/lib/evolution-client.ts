@@ -92,7 +92,7 @@ export class EvolutionClient {
     return this.request<unknown>({
       method: "POST",
       url: `/webhook/set/${encodeURIComponent(instance)}`,
-      data: { url, events },
+      data: { webhook: { enabled: true, url, events, webhookByEvents: false, webhookBase64: false } },
     });
   }
 
