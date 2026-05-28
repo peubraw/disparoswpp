@@ -1,11 +1,15 @@
 import type { ReactNode } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
+import { auth } from "@/auth";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default async function DashboardLayout({ children }: { children: ReactNode }) {
+  const session = await auth();
+  const isAdmin = session?.user?.role === "ADMIN";
+
   return (
     <div className="flex h-screen overflow-hidden bg-[#0a0f0d] text-[#e8f5e9] selection:bg-[#25D366] selection:text-[#0a0f0d]">
-      <Sidebar />
+      <Sidebar isAdmin={isAdmin} />
       <div className="flex flex-col flex-1 overflow-hidden relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,211,102,0.03)_0,transparent_100%)] pointer-events-none z-0"></div>
         <Header />

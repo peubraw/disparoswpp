@@ -16,7 +16,6 @@ import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { useState } from "react";
 import { UnreadBadge } from "@/components/inbox/unread-badge";
-import { useSession } from "next-auth/react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -27,22 +26,25 @@ const navItems = [
   { href: "/relatorios", label: "Relatórios", icon: BarChart3 },
 ];
 
-export function Sidebar() {
+export function Sidebar({ isAdmin }: { isAdmin?: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const items = [
+    ...navItems,
+    ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: ShieldCheck }] : []),
+  ];
+
   return (
     <>
-      {/* Desktop Sidebar */}
       <aside className="hidden md:flex md:w-64 md:flex-col border-r border-[rgba(37,211,102,0.2)] bg-[#111a16] h-full shadow-[2px_0_20px_rgba(0,0,0,0.5)]">
         <SidebarHeader />
         <div className="flex-1 overflow-y-auto px-4 py-6">
-          <SidebarNavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
+          <SidebarNavLinks pathname={pathname} items={items} onNavigate={() => setOpen(false)} />
         </div>
         <SidebarFooter />
       </aside>
 
-      {/* Mobile Sidebar */}
       <div className="md:hidden flex items-center p-4 border-b border-[rgba(37,211,102,0.2)] bg-[#111a16] absolute top-0 left-0 w-full z-10">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger className="md:hidden flex items-center justify-center p-2 rounded-md text-whatsapp hover:bg-[rgba(37,211,102,0.1)] transition-colors">
@@ -53,7 +55,7 @@ export function Sidebar() {
             <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
             <SidebarHeader />
             <div className="px-4 py-6 flex-1 overflow-y-auto">
-              <SidebarNavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
+              <SidebarNavLinks pathname={pathname} items={items} onNavigate={() => setOpen(false)} />
             </div>
             <SidebarFooter />
           </SheetContent>
@@ -85,19 +87,13 @@ function SidebarFooter() {
 
 function SidebarNavLinks({
   pathname,
+  items,
   onNavigate,
 }: {
   pathname: string | null;
+  items: { href: string; label: string; icon: React.ElementType }[];
   onNavigate: () => void;
 }) {
-  const { data: session } = useSession();
-  const isAdmin = session?.user?.role === "ADMIN";
-
-  const items = [
-    ...navItems,
-    ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: ShieldCheck }] : []),
-  ];
-
   return (
     <nav className="space-y-2" data-testid="sidebar">
       {items.map((item) => {
