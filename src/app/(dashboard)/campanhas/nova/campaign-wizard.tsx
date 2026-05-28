@@ -66,7 +66,8 @@ export function CampaignWizard({ instances, contactLists }: { instances: Instanc
         const formData = new FormData();
         formData.append("file", mediaFile);
 
-        const res = await fetch("/api/campaigns/media-upload", {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+        const res = await fetch(`${basePath}/api/campaigns/media-upload`, {
           method: "POST",
           body: formData,
         });

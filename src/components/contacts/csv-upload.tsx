@@ -78,7 +78,8 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("listId", listId);
-      const res = await fetch("/api/contacts/import", { method: "POST", body: formData });
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+      const res = await fetch(`${basePath}/api/contacts/import`, { method: "POST", body: formData });
       const data = (await res.json()) as ImportResult & { error?: string };
       if (!res.ok) {
         setError(data.error ?? "Erro ao importar.");
