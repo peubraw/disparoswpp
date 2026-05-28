@@ -1,0 +1,1 @@
+pauseCampaign updated to remove waiting/delayed message-send jobs for the campaign before setting status to PAUSED.\nVerification pending: npx tsc --noEmit.

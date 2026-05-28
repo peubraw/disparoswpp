@@ -125,6 +125,13 @@ export async function pauseCampaign(campaignId: string) {
   const campaign = await prisma.campaign.findFirst({ where: { id: campaignId, userId: user.id } });
   if (!campaign) return { error: "Campanha não encontrada." };
 
+  const jobs = await messageSendQueue.getJobs(["waiting", "delayed"]);
+  for (const job of jobs) {
+    if (job.data?.campaignId === campaignId) {
+      await job.remove();
+    }
+  }
+
   await prisma.campaign.update({
     where: { id: campaignId },
     data: { status: CampaignStatus.PAUSED },
