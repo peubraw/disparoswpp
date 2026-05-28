@@ -39,8 +39,9 @@ export async function addContact(listId: string, phoneNumber: string, name?: str
   });
   if (!list) return { error: "Lista não encontrada." };
 
-  const cleaned = phoneNumber.replace(/\D/g, "");
-  if (!cleaned) return { error: "Telefone inválido." };
+  const digits = phoneNumber.replace(/\D/g, "");
+  if (!digits) return { error: "Telefone inválido." };
+  const cleaned = digits.length < 12 ? `55${digits}` : digits;
 
   const existing = await prisma.contact.findFirst({
     where: { contactListId: listId, phoneNumber: cleaned },
@@ -63,7 +64,7 @@ export async function deleteContact(contactId: string, listId: string) {
   });
   if (!list) return { error: "Lista não encontrada." };
 
-  await prisma.contact.delete({ where: { id: contactId } });
+  await prisma.contact.delete({ where: { id: contactId, contactListId: listId } });
   revalidatePath(`/contatos/${listId}`);
   return { success: true };
 }

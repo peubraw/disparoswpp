@@ -25,7 +25,8 @@ export async function GET(
 
   try {
     const qr = await evolutionClient.getQRCode(instance.instanceName);
-    return NextResponse.json({ base64: qr.base64, code: qr.code });
+    const base64 = qr.base64?.startsWith("data:") ? qr.base64 : `data:image/png;base64,${qr.base64}`;
+    return NextResponse.json({ base64, code: qr.code });
   } catch {
     return NextResponse.json({ error: "QR code não disponível." }, { status: 502 });
   }
