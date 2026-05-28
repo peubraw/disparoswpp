@@ -1,0 +1,12 @@
+Task 14 evidence
+
+Modified file:
+- workers/src/index.ts
+
+Changes:
+- imported processSendReply from ./workers/reply-worker
+- registered send-reply handler immediately after finalize-campaign in messageSendWorker
+
+Verification:
+- npx tsc --noEmit
+- result: TSC_OK

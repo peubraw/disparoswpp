@@ -3,6 +3,7 @@ import Redis from "ioredis";
 import { processCampaignDispatch } from "./workers/campaign-worker";
 import { processFinalCampaign } from "./workers/finalize-campaign-worker";
 import { processSendMessage } from "./workers/message-worker";
+import { processSendReply } from "./workers/reply-worker";
 import { processScheduledCampaign } from "./workers/scheduled-campaign-worker";
 
 const connection = new Redis(process.env.REDIS_URL ?? "redis://redis:6379", {
@@ -20,6 +21,9 @@ const messageSendWorker = new Worker(
     }
     if (job.name === "send-message") {
       return processSendMessage(job as Parameters<typeof processSendMessage>[0]);
+    }
+    if (job.name === "send-reply") {
+      return processSendReply(job as Parameters<typeof processSendReply>[0]);
     }
   },
   {
