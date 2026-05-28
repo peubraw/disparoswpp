@@ -124,6 +124,9 @@ export async function pauseCampaign(campaignId: string) {
   const user = await getCurrentUser();
   const campaign = await prisma.campaign.findFirst({ where: { id: campaignId, userId: user.id } });
   if (!campaign) return { error: "Campanha não encontrada." };
+  if (campaign.status === CampaignStatus.PAUSED) {
+    return { error: "A campanha já está pausada." };
+  }
 
   const jobs = await messageSendQueue.getJobs(["waiting", "delayed"]);
   for (const job of jobs) {
@@ -220,6 +223,12 @@ export async function resumeCampaign(campaignId: string) {
       }
     );
   }
+
+  await messageSendQueue.add(
+    "finalize-campaign",
+    { campaignId },
+    { delay: pendingMessages.length * campaign.throttleDelay + 30000 }
+  );
 
   revalidatePath("/campanhas");
   revalidatePath(`/campanhas/${campaignId}`);
