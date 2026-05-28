@@ -62,6 +62,8 @@ services:
         condition: service_started
       migrate:
         condition: service_completed_successfully
+    volumes:
+      - uploads_data:/app/public/uploads
     environment:
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
@@ -137,5 +139,6 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  uploads_data:
   evolution_instances:
   evolution_store:
