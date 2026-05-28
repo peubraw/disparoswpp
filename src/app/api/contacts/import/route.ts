@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
   const formData = await req.formData();
   const file = formData.get("file") as File | null;
   const listId = formData.get("listId") as string | null;
+  const mappingRaw = formData.get("mapping") as string | null;
 
   if (!file || !listId) {
     return NextResponse.json({ error: "Arquivo e listId são obrigatórios." }, { status: 400 });
@@ -49,6 +50,66 @@ export async function POST(req: NextRequest) {
   }
 
   const text = await file.text();
+  const mapping = mappingRaw ? (JSON.parse(mappingRaw) as Record<string, string>) : null;
+
+  if (mapping) {
+    const parsed = Papa.parse<string[]>(text, { header: false, skipEmptyLines: true });
+
+    if (parsed.data.length > 10000) {
+      return NextResponse.json({ error: "Limite de 10.000 contatos excedido." }, { status: 422 });
+    }
+
+    const phoneIndex = Object.entries(mapping).find(([, field]) => field === "phoneNumber")?.[0];
+    if (phoneIndex === undefined) {
+      return NextResponse.json(
+        { error: "Coluna de telefone não encontrada. Use: telefone, phone, celular, numero." },
+        { status: 422 }
+      );
+    }
+
+    const nameIndex = Object.entries(mapping).find(([, field]) => field === "name")?.[0];
+    const contacts = parsed.data
+      .slice(1)
+      .filter((row) => row[Number(phoneIndex)])
+      .map((row) => {
+        const customFields: Record<string, string> = {};
+
+        for (const [index, fieldName] of Object.entries(mapping)) {
+          const value = row[Number(index)] ?? "";
+          if (!value) continue;
+
+          if (fieldName === "phoneNumber" || fieldName === "name") continue;
+          if (fieldName === "company") {
+            customFields["empresa"] = value;
+            continue;
+          }
+          if (fieldName.startsWith("customField_")) {
+            customFields[fieldName.replace("customField_", "")] = value;
+          }
+        }
+
+        return {
+          contactListId: listId,
+          phoneNumber: normalizePhone(row[Number(phoneIndex)] ?? ""),
+          name: nameIndex ? (row[Number(nameIndex)] ?? null) : null,
+          customFields: Object.keys(customFields).length > 0 ? customFields : {},
+        };
+      });
+
+    let imported = 0;
+    let duplicates = 0;
+    const errors = parsed.errors.length;
+
+    for (let i = 0; i < contacts.length; i += CHUNK_SIZE) {
+      const chunk = contacts.slice(i, i + CHUNK_SIZE);
+      const result = await prisma.contact.createMany({ data: chunk, skipDuplicates: true });
+      imported += result.count;
+      duplicates += chunk.length - result.count;
+    }
+
+    return NextResponse.json({ imported, duplicates, errors });
+  }
+
   const parsed = Papa.parse<Record<string, string>>(text, { header: true, skipEmptyLines: true });
 
   if (parsed.data.length > 10000) {
