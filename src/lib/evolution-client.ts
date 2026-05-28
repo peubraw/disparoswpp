@@ -102,6 +102,22 @@ export class EvolutionClient {
       url: "/instance/fetchInstances",
     });
   }
+
+  async validateNumbers(
+    instanceName: string,
+    phones: string[],
+  ): Promise<Array<{ number: string; exists: boolean }>> {
+    const response = await this.request<Array<{ number: string; numberExists: boolean }>>({
+      method: "POST",
+      url: `/chat/whatsappNumbers/${encodeURIComponent(instanceName)}`,
+      data: { numbers: phones },
+    });
+
+    return response.map(({ number, numberExists }) => ({
+      number,
+      exists: numberExists,
+    }));
+  }
 }
 
 export const evolutionClient = new EvolutionClient(

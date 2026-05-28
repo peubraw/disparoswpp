@@ -1,0 +1,1 @@
+validateNumbers(instanceName: string, phones: string[]): Promise<Array<{ number: string; exists: boolean }>>
