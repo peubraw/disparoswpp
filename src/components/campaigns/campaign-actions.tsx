@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { startCampaign, pauseCampaign, cancelCampaign, deleteCampaign } from "@/actions/campaigns";
+import { startCampaign, pauseCampaign, resumeCampaign, cancelCampaign, deleteCampaign } from "@/actions/campaigns";
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -30,12 +30,20 @@ export function CampaignActions({ campaignId, status }: Props) {
   return (
     <div className="flex flex-col items-end gap-2">
       <div className="flex gap-2">
-        {(status === "DRAFT" || status === "PAUSED") && (
+        {status === "DRAFT" && (
           <Button
             disabled={loading}
             onClick={() => handle(() => startCampaign(campaignId))}
           >
             {loading ? "Iniciando..." : "Iniciar"}
+          </Button>
+        )}
+        {status === "PAUSED" && (
+          <Button
+            disabled={loading}
+            onClick={() => handle(() => resumeCampaign(campaignId))}
+          >
+            {loading ? "Retomando..." : "Retomar"}
           </Button>
         )}
         {status === "RUNNING" && (
