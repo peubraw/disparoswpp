@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { DeleteCampaignButton } from "@/components/campaigns/campaign-actions";
 import Link from "next/link";
 import { CampaignStatus } from "@prisma/client";
 
@@ -104,11 +105,14 @@ export default async function CampanhasPage() {
                         {campaign.createdAt.toLocaleDateString("pt-BR")}
                       </TableCell>
                       <TableCell className="text-right">
-                        <Link href={`/campanhas/${campaign.id}`}>
-                          <Button variant="ghost" size="sm">
-                            Ver detalhes
-                          </Button>
-                        </Link>
+                        <div className="flex items-center justify-end gap-2">
+                          <Link href={`/campanhas/${campaign.id}`}>
+                            <Button variant="ghost" size="sm">
+                              Ver detalhes
+                            </Button>
+                          </Link>
+                          <DeleteCampaignButton campaignId={campaign.id} status={campaign.status} />
+                        </div>
                       </TableCell>
                     </TableRow>
                   );

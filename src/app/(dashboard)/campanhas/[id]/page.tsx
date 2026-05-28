@@ -30,11 +30,12 @@ function getMessageStatusBadge(status: MessageStatus) {
   }
 }
 
-export default async function CampanhaDetailPage({ params }: { params: { id: string } }) {
+export default async function CampanhaDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await getCurrentUser();
+  const { id } = await params;
 
   const campaign = await prisma.campaign.findFirst({
-    where: { id: params.id, userId: user.id },
+    where: { id, userId: user.id },
     include: {
       waInstance: true,
       messages: {

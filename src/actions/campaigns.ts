@@ -205,6 +205,30 @@ export async function scheduleCampaign(campaignId: string, scheduledFor: string)
   return { success: true };
 }
 
+export async function deleteCampaign(campaignId: string) {
+  const user = await getCurrentUser();
+  const campaign = await prisma.campaign.findFirst({ where: { id: campaignId, userId: user.id } });
+  if (!campaign) return { error: "Campanha não encontrada." };
+
+  if (campaign.status === CampaignStatus.RUNNING) {
+    return { error: "Não é possível apagar uma campanha em execução. Cancele primeiro." };
+  }
+
+  const jobs = await messageSendQueue.getJobs(["waiting", "delayed"]);
+  for (const job of jobs) {
+    if (job.data?.campaignId === campaignId) await job.remove();
+  }
+  const schedulerJob = await campaignSchedulerQueue.getJob(campaignId);
+  if (schedulerJob) await schedulerJob.remove();
+
+  await prisma.message.deleteMany({ where: { campaignId } });
+  await prisma.campaignContactList.deleteMany({ where: { campaignId } });
+  await prisma.campaign.delete({ where: { id: campaignId } });
+
+  revalidatePath("/campanhas");
+  return { success: true };
+}
+
 export async function cancelSchedule(campaignId: string) {
   const user = await getCurrentUser();
   const campaign = await prisma.campaign.findFirst({ where: { id: campaignId, userId: user.id } });
