@@ -14,11 +14,15 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const isAuthPage = pathname.endsWith("/login") || pathname.endsWith("/register");
+  const basePath = process.env.BASE_PATH ?? process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
   if (!token && !isAuthPage) {
-    const basePath = process.env.BASE_PATH ?? process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-    const loginUrl = new URL(`${basePath}/login`, request.url);
-    return NextResponse.redirect(loginUrl);
+    return NextResponse.redirect(new URL(`${basePath}/login`, request.url));
+  }
+
+  const isAdminPage = pathname === `${basePath}/admin` || pathname.startsWith(`${basePath}/admin/`);
+  if (isAdminPage && token?.role !== "ADMIN") {
+    return NextResponse.redirect(new URL(`${basePath}/dashboard`, request.url));
   }
 
   return NextResponse.next();
@@ -27,4 +31,3 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico|uploads).*)"],
 };
-

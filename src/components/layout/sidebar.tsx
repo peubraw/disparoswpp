@@ -9,12 +9,14 @@ import {
   Users,
   MessageSquare,
   BarChart3,
-  Menu
+  Menu,
+  ShieldCheck
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { useState } from "react";
 import { UnreadBadge } from "@/components/inbox/unread-badge";
+import { useSession } from "next-auth/react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -88,9 +90,17 @@ function SidebarNavLinks({
   pathname: string | null;
   onNavigate: () => void;
 }) {
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === "ADMIN";
+
+  const items = [
+    ...navItems,
+    ...(isAdmin ? [{ href: "/admin", label: "Admin", icon: ShieldCheck }] : []),
+  ];
+
   return (
     <nav className="space-y-2" data-testid="sidebar">
-      {navItems.map((item) => {
+      {items.map((item) => {
         const isActive = pathname === item.href || pathname?.startsWith(`${item.href}/`);
         const Icon = item.icon;
 
@@ -106,11 +116,11 @@ function SidebarNavLinks({
                 : "border-transparent text-muted-foreground hover:bg-[rgba(37,211,102,0.05)] hover:text-[#e8f5e9] hover:border-[rgba(37,211,102,0.3)]"
             )}
           >
-            <Icon 
+            <Icon
               className={cn(
-                "h-5 w-5 transition-transform duration-300", 
+                "h-5 w-5 transition-transform duration-300",
                 isActive ? "animate-pulse-green text-[#25D366]" : "group-hover:scale-110 group-hover:text-[#25D366]"
-              )} 
+              )}
             />
             <span className={cn("tracking-wide", isActive && "drop-shadow-[0_0_5px_rgba(37,211,102,0.4)]")}>
               {item.label}
