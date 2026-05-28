@@ -49,11 +49,15 @@ export async function processSendMessage(job: Job<SendMessageJobData>) {
 
   try {
     if (mediaType !== MediaType.NONE && mediaUrl) {
+      const absoluteMediaUrl = mediaUrl.startsWith("http")
+        ? mediaUrl
+        : `${(process.env.NEXTAUTH_URL ?? "").replace(/\/$/, "")}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${mediaUrl}`;
+
       const result = await evolutionClient.sendMedia(instanceName, {
         number: normalizedPhone,
         mediatype: mediaType.toLowerCase(),
         mimetype: getMimeType(mediaType),
-        media: mediaUrl,
+        media: absoluteMediaUrl,
         caption: text,
       });
       evolutionMessageId = result?.key?.id;
