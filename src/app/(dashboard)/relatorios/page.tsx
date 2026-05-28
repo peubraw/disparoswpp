@@ -14,13 +14,13 @@ function getStatusBadge(status: CampaignStatus) {
     case "DRAFT":
       return <Badge variant="secondary">Rascunho</Badge>;
     case "SCHEDULED":
-      return <Badge variant="outline" className="bg-blue-50 text-blue-700">Agendada</Badge>;
+      return <Badge variant="outline" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Agendada</Badge>;
     case "RUNNING":
-      return <Badge variant="default" className="bg-green-600">Em Execução</Badge>;
+      return <Badge variant="default" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Em Execução</Badge>;
     case "PAUSED":
-      return <Badge variant="outline" className="bg-amber-100 text-amber-800">Pausada</Badge>;
+      return <Badge variant="outline" className="bg-[rgba(245,158,11,0.1)] text-[#f59e0b] border border-[rgba(245,158,11,0.2)]">Pausada</Badge>;
     case "COMPLETED":
-      return <Badge variant="default" className="bg-gray-800">Concluída</Badge>;
+      return <Badge variant="default" className="bg-[rgba(232,245,233,0.1)] text-[#e8f5e9]">Concluída</Badge>;
     case "FAILED":
       return <Badge variant="destructive">Falhou</Badge>;
     default:
@@ -77,7 +77,7 @@ export default async function RelatoriosPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Enviadas</CardTitle>
-            <Send className="h-4 w-4 text-blue-500" />
+            <Send className="h-4 w-4 text-[#25D366]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totals.sent}</div>
@@ -87,7 +87,7 @@ export default async function RelatoriosPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Entregues</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            <CheckCircle2 className="h-4 w-4 text-[#25D366]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totals.delivered}</div>
@@ -97,7 +97,7 @@ export default async function RelatoriosPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Lidas</CardTitle>
-            <MailOpen className="h-4 w-4 text-purple-500" />
+            <MailOpen className="h-4 w-4 text-[#25D366]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totals.read}</div>
@@ -107,7 +107,7 @@ export default async function RelatoriosPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Falhas</CardTitle>
-            <XCircle className="h-4 w-4 text-red-500" />
+            <XCircle className="h-4 w-4 text-[#ef4444]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totals.failed}</div>
@@ -158,7 +158,7 @@ export default async function RelatoriosPage() {
                     <TableCell className="text-center">{campaign.stats.sent}</TableCell>
                     <TableCell className="text-center">{campaign.stats.delivered}</TableCell>
                     <TableCell className="text-center">{campaign.stats.read}</TableCell>
-                    <TableCell className="text-center text-red-600">{campaign.stats.failed}</TableCell>
+                    <TableCell className="text-center text-[#ef4444]">{campaign.stats.failed}</TableCell>
                     <TableCell className="w-[160px]">
                       <div className="flex items-center gap-2">
                         <Progress value={campaign.stats.deliveryRate} className="h-2 flex-1" />

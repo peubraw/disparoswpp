@@ -13,5 +13,6 @@ export async function configureWebhook(instanceName: string): Promise<void> {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const webhookUrl = `${base}${basePath}/api/webhooks/evolution`;
 
-  await evolutionClient.setWebhook(instanceName, webhookUrl, WEBHOOK_EVENTS);
+  const apiKey = process.env.EVOLUTION_API_KEY ?? "";
+  await evolutionClient.setWebhook(instanceName, webhookUrl, WEBHOOK_EVENTS, apiKey ? { apikey: apiKey } : undefined);
 }

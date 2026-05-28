@@ -37,19 +37,22 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
-        <h1 className="mb-6 text-2xl font-bold text-gray-900">Criar conta</h1>
+    <div className="flex min-h-screen items-center justify-center bg-[#0a0f0d]">
+      <div className="w-full max-w-md rounded-xl border border-[rgba(37,211,102,0.2)] bg-[#111a16] p-8 shadow-sm">
+        <h1 className="mb-6 text-2xl font-heading tracking-widest uppercase font-bold text-[#e8f5e9] flex items-center gap-2">
+          <div className="h-3 w-3 rounded-full bg-[#25D366] animate-pulse"></div>
+          DISPAROS
+        </h1>
 
         {error && (
-          <div className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-700">
+          <div className="mb-4 rounded-md bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] p-3 text-sm text-[#ef4444]">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="mb-1 block font-heading text-xs tracking-widest uppercase text-muted-foreground">
               Nome
             </label>
             <input
@@ -58,13 +61,13 @@ export default function RegisterPage() {
               type="text"
               required
               autoComplete="name"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-sm bg-[#0a0f0d] border border-[rgba(37,211,102,0.2)] px-3 py-2 text-sm text-[#e8f5e9] focus:border-[#25D366] focus:outline-none focus:ring-0"
               placeholder="Seu nome"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="mb-1 block font-heading text-xs tracking-widest uppercase text-muted-foreground">
               Email
             </label>
             <input
@@ -73,13 +76,13 @@ export default function RegisterPage() {
               type="email"
               required
               autoComplete="email"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-sm bg-[#0a0f0d] border border-[rgba(37,211,102,0.2)] px-3 py-2 text-sm text-[#e8f5e9] focus:border-[#25D366] focus:outline-none focus:ring-0"
               placeholder="seu@email.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="mb-1 block font-heading text-xs tracking-widest uppercase text-muted-foreground">
               Senha
             </label>
             <input
@@ -88,13 +91,13 @@ export default function RegisterPage() {
               type="password"
               required
               autoComplete="new-password"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-sm bg-[#0a0f0d] border border-[rgba(37,211,102,0.2)] px-3 py-2 text-sm text-[#e8f5e9] focus:border-[#25D366] focus:outline-none focus:ring-0"
               placeholder="••••••"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="mb-1 block text-sm font-medium text-gray-700">
+            <label htmlFor="confirmPassword" className="mb-1 block font-heading text-xs tracking-widest uppercase text-muted-foreground">
               Confirmar senha
             </label>
             <input
@@ -103,7 +106,7 @@ export default function RegisterPage() {
               type="password"
               required
               autoComplete="new-password"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-sm bg-[#0a0f0d] border border-[rgba(37,211,102,0.2)] px-3 py-2 text-sm text-[#e8f5e9] focus:border-[#25D366] focus:outline-none focus:ring-0"
               placeholder="••••••"
             />
           </div>
@@ -111,15 +114,15 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={pending}
-            className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+            className="w-full rounded-sm font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.4)] text-[#25D366] bg-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.15)] px-4 py-2 disabled:opacity-50"
           >
             {pending ? "Criando conta..." : "Criar conta"}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-sm text-gray-600">
+        <p className="mt-4 text-center text-sm text-muted-foreground">
           Já tem conta?{" "}
-          <Link href="/login" className="font-medium text-blue-600 hover:underline">
+          <Link href="/login" className="font-heading text-xs tracking-widest uppercase text-[#25D366] hover:text-[#e8f5e9] hover:underline">
             Entrar
           </Link>
         </p>

@@ -29,9 +29,9 @@ export function DeleteListButton({ listId, listName }: DeleteListButtonProps) {
     <button
       onClick={handleDelete}
       disabled={loading}
-      className="text-red-600 hover:underline text-sm disabled:opacity-50"
+      className="font-heading text-xs font-bold tracking-widest text-[#ef4444] hover:text-[#fca5a5] transition-colors uppercase disabled:opacity-40"
     >
-      {loading ? "Excluindo..." : "Excluir"}
+      {loading ? "[ EXCLUINDO... ]" : "[ EXCLUIR ]"}
     </button>
   );
 }

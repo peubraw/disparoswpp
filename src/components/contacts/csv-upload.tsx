@@ -95,8 +95,8 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
   return (
     <div className="space-y-4">
       <div
-        className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-          dragging ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"
+        className={`border-2 border-dashed rounded-sm p-8 text-center cursor-pointer transition-colors ${
+          dragging ? "border-[#25D366] bg-[rgba(37,211,102,0.05)]" : "border-[rgba(37,211,102,0.2)] hover:border-[rgba(37,211,102,0.4)]"
         }`}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
@@ -111,39 +111,39 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
           onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
         />
         {file ? (
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-[#e8f5e9]">
             <span className="font-medium">{file.name}</span> ({(file.size / 1024).toFixed(1)} KB)
           </p>
         ) : (
-          <p className="text-sm text-gray-500">
-            Arraste um arquivo CSV ou <span className="text-blue-600 underline">clique para selecionar</span>
+          <p className="text-sm text-muted-foreground">
+            Arraste um arquivo CSV ou <span className="text-[#25D366] hover:text-[#e8f5e9] underline">clique para selecionar</span>
           </p>
         )}
       </div>
 
       {headers.length > 0 && (
-        <div className="border rounded-lg overflow-hidden">
+        <div className="border border-[rgba(37,211,102,0.15)] rounded-sm overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-[rgba(37,211,102,0.05)] border-b border-[rgba(37,211,102,0.15)]">
               <tr>
-                <th className="px-4 py-2 text-left font-medium text-gray-600">Coluna CSV</th>
-                <th className="px-4 py-2 text-left font-medium text-gray-600">Mapeado para</th>
+                <th className="px-4 py-2 text-left font-heading text-xs tracking-widest uppercase text-[#25D366]">Coluna CSV</th>
+                <th className="px-4 py-2 text-left font-heading text-xs tracking-widest uppercase text-[#25D366]">Mapeado para</th>
               </tr>
             </thead>
             <tbody>
               {headers.map((h) => (
-                <tr key={h} className="border-t">
-                  <td className="px-4 py-2 text-gray-800">{h}</td>
+                <tr key={h} className="border-t border-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.04)] transition-colors">
+                  <td className="px-4 py-2 text-[#e8f5e9]">{h}</td>
                   <td className="px-4 py-2">
                     <span
-                      className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
+                      className={`inline-block px-2 py-0.5 rounded-sm font-heading tracking-widest uppercase text-[10px] ${
                         mapping[h] === "phoneNumber"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]"
                           : mapping[h] === "name"
-                          ? "bg-blue-100 text-blue-800"
+                          ? "bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]"
                           : mapping[h] === "company"
-                          ? "bg-purple-100 text-purple-800"
-                          : "bg-gray-100 text-gray-600"
+                          ? "bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]"
+                          : "bg-[rgba(232,245,233,0.1)] text-[#e8f5e9] border border-[rgba(37,211,102,0.15)]"
                       }`}
                     >
                       {FIELD_LABELS[mapping[h]] ?? mapping[h]}
@@ -157,13 +157,13 @@ export function CsvUpload({ listId, onSuccess }: CsvUploadProps) {
       )}
 
       {error && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">{error}</p>
+        <p className="text-sm text-[#ef4444] bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-sm px-3 py-2">{error}</p>
       )}
 
       <button
         onClick={handleImport}
         disabled={!file || loading}
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.4)] text-[#25D366] bg-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.15)] rounded-sm px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         {loading ? "Importando..." : "Importar Contatos"}
       </button>

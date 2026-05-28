@@ -38,7 +38,7 @@ export function CountdownTimer({ scheduledFor }: CountdownTimerProps) {
   }, [scheduledFor]);
 
   if (timeLeft.expired) {
-    return <span className="text-sm text-amber-600 font-medium">Disparando em breve...</span>;
+    return <span className="text-sm text-[#f59e0b] font-medium">Disparando em breve...</span>;
   }
 
   const parts: string[] = [];
@@ -48,7 +48,7 @@ export function CountdownTimer({ scheduledFor }: CountdownTimerProps) {
   parts.push(`${String(timeLeft.seconds).padStart(2, "0")}s`);
 
   return (
-    <span className="text-sm font-mono tabular-nums text-blue-700">
+    <span className="text-sm font-mono tabular-nums text-[#25D366]">
       {parts.join(" ")}
     </span>
   );

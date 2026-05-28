@@ -41,33 +41,33 @@ export default async function ContactListPage({ params, searchParams }: PageProp
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link href="/contatos" className="text-gray-500 hover:text-gray-700 text-sm">
+          <Link href="/contatos" className="font-heading text-xs tracking-widest uppercase text-muted-foreground hover:text-[#e8f5e9] transition-colors">
             ← Listas
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">{list.name}</h1>
-          <span className="text-sm text-gray-500">({total.toLocaleString("pt-BR")} contatos)</span>
+          <h1 className="text-2xl font-heading tracking-widest uppercase font-bold text-[#e8f5e9]">{list.name}</h1>
+          <span className="text-sm text-muted-foreground">({total.toLocaleString("pt-BR")} contatos)</span>
         </div>
         <AddContactButton listId={listId} />
       </div>
 
       {contacts.length === 0 ? (
-        <div className="text-center py-16 text-gray-500">
+        <div className="text-center py-16 text-muted-foreground">
           <p>Nenhum contato nesta lista.</p>
-          <Link href="/contatos/nova" className="text-blue-600 hover:underline text-sm mt-2 inline-block">
+          <Link href="/contatos/nova" className="font-heading text-xs tracking-widest uppercase text-[#25D366] hover:text-[#e8f5e9] hover:underline mt-2 inline-block">
             Importar contatos
           </Link>
         </div>
       ) : (
         <>
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border border-[rgba(37,211,102,0.15)] rounded-sm overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50">
+              <thead className="bg-[rgba(37,211,102,0.05)] border-b border-[rgba(37,211,102,0.15)]">
                 <tr>
-                  <th className="px-4 py-3 text-left font-medium text-gray-600">Telefone</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-600">Nome</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-600">Campos extras</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-600">Adicionado em</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-600">Ações</th>
+                  <th className="px-4 py-3 text-left font-heading text-xs text-[#25D366] uppercase tracking-widest">Telefone</th>
+                  <th className="px-4 py-3 text-left font-heading text-xs text-[#25D366] uppercase tracking-widest">Nome</th>
+                  <th className="px-4 py-3 text-left font-heading text-xs text-[#25D366] uppercase tracking-widest">Campos extras</th>
+                  <th className="px-4 py-3 text-left font-heading text-xs text-[#25D366] uppercase tracking-widest">Adicionado em</th>
+                  <th className="px-4 py-3 text-right font-heading text-xs text-[#25D366] uppercase tracking-widest">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,15 +80,15 @@ export default async function ContactListPage({ params, searchParams }: PageProp
                       : {};
                   const customEntries = Object.entries(custom).filter(([, v]) => v);
                   return (
-                    <tr key={contact.id} className="border-t hover:bg-gray-50">
-                      <td className="px-4 py-3 font-mono text-gray-800">{contact.phoneNumber}</td>
-                      <td className="px-4 py-3 text-gray-700">{contact.name ?? "—"}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">
+                    <tr key={contact.id} className="border-t border-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.04)] transition-colors">
+                      <td className="px-4 py-3 font-mono text-[#e8f5e9]">{contact.phoneNumber}</td>
+                      <td className="px-4 py-3 text-[#e8f5e9]">{contact.name ?? "—"}</td>
+                      <td className="px-4 py-3 text-muted-foreground text-xs">
                         {customEntries.length > 0
                           ? customEntries.map(([k, v]) => `${k}: ${v}`).join(", ")
                           : "—"}
                       </td>
-                      <td className="px-4 py-3 text-gray-500">
+                      <td className="px-4 py-3 text-muted-foreground">
                         {new Date(contact.createdAt).toLocaleDateString("pt-BR")}
                       </td>
                       <td className="px-4 py-3 text-right">
@@ -103,14 +103,14 @@ export default async function ContactListPage({ params, searchParams }: PageProp
 
           {totalPages > 1 && (
             <div className="flex items-center justify-between">
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted-foreground">
                 Página {page} de {totalPages}
               </p>
               <div className="flex gap-2">
                 {page > 1 && (
                   <Link
                     href={`/contatos/${listId}?page=${page - 1}`}
-                    className="px-3 py-1.5 border border-gray-300 rounded text-sm hover:bg-gray-50 transition-colors"
+                    className="font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.15)] text-muted-foreground bg-transparent hover:border-[rgba(37,211,102,0.3)] hover:text-[#e8f5e9] rounded-sm px-3 py-1.5 transition-colors"
                   >
                     ← Anterior
                   </Link>
@@ -118,7 +118,7 @@ export default async function ContactListPage({ params, searchParams }: PageProp
                 {page < totalPages && (
                   <Link
                     href={`/contatos/${listId}?page=${page + 1}`}
-                    className="px-3 py-1.5 border border-gray-300 rounded text-sm hover:bg-gray-50 transition-colors"
+                    className="font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.15)] text-muted-foreground bg-transparent hover:border-[rgba(37,211,102,0.3)] hover:text-[#e8f5e9] rounded-sm px-3 py-1.5 transition-colors"
                   >
                     Próxima →
                   </Link>

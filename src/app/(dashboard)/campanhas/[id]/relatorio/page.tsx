@@ -147,7 +147,7 @@ export default async function CampaignReportPage({
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Enviadas</CardTitle>
-            <Send className="h-4 w-4 text-blue-500" />
+            <Send className="h-4 w-4 text-[#25D366]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.sent + stats.delivered + stats.read}</div>
@@ -158,7 +158,7 @@ export default async function CampaignReportPage({
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Entregues</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            <CheckCircle2 className="h-4 w-4 text-[#25D366]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.delivered + stats.read}</div>
@@ -169,7 +169,7 @@ export default async function CampaignReportPage({
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Lidas</CardTitle>
-            <MailOpen className="h-4 w-4 text-purple-500" />
+            <MailOpen className="h-4 w-4 text-[#25D366]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.read}</div>
@@ -180,7 +180,7 @@ export default async function CampaignReportPage({
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Falhas</CardTitle>
-            <XCircle className="h-4 w-4 text-red-500" />
+            <XCircle className="h-4 w-4 text-[#ef4444]" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.failed}</div>

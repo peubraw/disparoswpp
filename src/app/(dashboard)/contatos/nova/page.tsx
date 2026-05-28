@@ -62,38 +62,38 @@ export default function NovaListaPage() {
 
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Nova Lista de Contatos</h1>
+      <h1 className="text-2xl font-heading tracking-widest uppercase font-bold text-[#e8f5e9]">Nova Lista de Contatos</h1>
 
       {step === "form" && (
         <form onSubmit={handleCreateList} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nome da lista <span className="text-red-500">*</span>
+            <label className="block font-heading text-xs tracking-widest uppercase text-muted-foreground mb-1">
+              Nome da lista <span className="text-[#ef4444]">*</span>
             </label>
             <input
               type="text"
               value={listName}
               onChange={(e) => setListName(e.target.value)}
               placeholder="Ex: Clientes Janeiro 2025"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-[rgba(37,211,102,0.2)] bg-[#0a0f0d] text-[#e8f5e9] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#25D366] focus:ring-0"
               required
             />
           </div>
           {error && (
-            <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">{error}</p>
+            <p className="text-sm text-[#ef4444] bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-sm px-3 py-2">{error}</p>
           )}
           <div className="flex gap-3">
             <button
               type="button"
               onClick={() => router.push("/contatos")}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.15)] text-muted-foreground bg-transparent hover:border-[rgba(37,211,102,0.3)] rounded-sm px-4 py-2 transition-colors"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading || !listName.trim()}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.4)] text-[#25D366] bg-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.15)] rounded-sm px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? "Criando..." : "Criar Lista"}
             </button>
@@ -103,29 +103,29 @@ export default function NovaListaPage() {
 
       {step === "import" && listId && (
         <div className="space-y-4">
-          <div className="bg-green-50 border border-green-200 rounded-lg px-4 py-3">
-            <p className="text-sm text-green-800">
-              Lista <strong>{listName}</strong> criada com sucesso. Adicione contatos abaixo.
+          <div className="bg-[rgba(37,211,102,0.1)] border border-[rgba(37,211,102,0.2)] rounded-sm px-4 py-3">
+            <p className="text-sm text-[#25D366]">
+              Lista <strong className="text-[#e8f5e9]">{listName}</strong> criada com sucesso. Adicione contatos abaixo.
             </p>
           </div>
 
-          <div className="flex border-b border-gray-200">
+          <div className="flex border-b border-[rgba(37,211,102,0.15)]">
             <button
               onClick={() => setImportTab("csv")}
-              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+              className={`px-4 py-2 text-xs font-heading tracking-widest uppercase border-b-2 transition-colors ${
                 importTab === "csv"
-                  ? "border-blue-600 text-blue-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
+                  ? "border-[#25D366] text-[#25D366]"
+                  : "border-transparent text-muted-foreground hover:text-[#e8f5e9]"
               }`}
             >
               Importar CSV
             </button>
             <button
               onClick={() => setImportTab("manual")}
-              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+              className={`px-4 py-2 text-xs font-heading tracking-widest uppercase border-b-2 transition-colors ${
                 importTab === "manual"
-                  ? "border-blue-600 text-blue-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
+                  ? "border-[#25D366] text-[#25D366]"
+                  : "border-transparent text-muted-foreground hover:text-[#e8f5e9]"
               }`}
             >
               Adicionar manualmente
@@ -139,43 +139,43 @@ export default function NovaListaPage() {
           {importTab === "manual" && (
             <div className="space-y-4">
               {addedCount > 0 && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-2 text-sm text-blue-800">
+                <div className="bg-[rgba(37,211,102,0.1)] border border-[rgba(37,211,102,0.2)] rounded-sm px-4 py-2 text-sm text-[#25D366]">
                   {addedCount} contato{addedCount !== 1 ? "s" : ""} adicionado{addedCount !== 1 ? "s" : ""}.
                 </div>
               )}
               <form onSubmit={handleAddContact} className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Telefone <span className="text-red-500">*</span>
+                  <label className="block font-heading text-xs tracking-widest uppercase text-muted-foreground mb-1">
+                    Telefone <span className="text-[#ef4444]">*</span>
                   </label>
                   <input
                     type="text"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Ex: 5511999999999"
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-[rgba(37,211,102,0.2)] bg-[#0a0f0d] text-[#e8f5e9] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#25D366] focus:ring-0"
                     required
                     autoFocus
                   />
-                  <p className="text-xs text-gray-500 mt-1">Código do país + DDD + número. Ex: 5511999999999</p>
+                  <p className="text-xs text-muted-foreground mt-1">Código do país + DDD + número. Ex: 5511999999999</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Nome (opcional)</label>
+                  <label className="block font-heading text-xs tracking-widest uppercase text-muted-foreground mb-1">Nome (opcional)</label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Ex: João Silva"
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-[rgba(37,211,102,0.2)] bg-[#0a0f0d] text-[#e8f5e9] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#25D366] focus:ring-0"
                   />
                 </div>
                 {addError && (
-                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">{addError}</p>
+                  <p className="text-sm text-[#ef4444] bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] rounded-sm px-3 py-2">{addError}</p>
                 )}
                 <button
                   type="submit"
                   disabled={addLoading || !phone.trim()}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="font-heading text-xs tracking-widest uppercase border border-[rgba(37,211,102,0.4)] text-[#25D366] bg-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.15)] rounded-sm px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {addLoading ? "Adicionando..." : "Adicionar Contato"}
                 </button>
@@ -185,7 +185,7 @@ export default function NovaListaPage() {
 
           <button
             onClick={() => router.push("/contatos")}
-            className="text-sm text-gray-500 hover:underline"
+            className="font-heading text-xs tracking-widest uppercase text-muted-foreground hover:text-[#e8f5e9] hover:underline transition-colors"
           >
             {addedCount > 0 || importTab === "csv" ? "Concluir" : "Pular"}
           </button>

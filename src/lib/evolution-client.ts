@@ -88,11 +88,11 @@ export class EvolutionClient {
     });
   }
 
-  async setWebhook(instance: string, url: string, events: string[]): Promise<unknown> {
+  async setWebhook(instance: string, url: string, events: string[], headers?: Record<string, string>): Promise<unknown> {
     return this.request<unknown>({
       method: "POST",
       url: `/webhook/set/${encodeURIComponent(instance)}`,
-      data: { webhook: { enabled: true, url, events, webhookByEvents: false, webhookBase64: false } },
+      data: { webhook: { enabled: true, url, events, webhookByEvents: false, webhookBase64: false, ...(headers ? { headers } : {}) } },
     });
   }
 

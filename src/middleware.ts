@@ -12,8 +12,11 @@ export async function middleware(request: NextRequest) {
         : "authjs.session-token",
   });
 
-  if (!token) {
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const pathname = request.nextUrl.pathname;
+  const isAuthPage = pathname.endsWith("/login") || pathname.endsWith("/register");
+
+  if (!token && !isAuthPage) {
+    const basePath = process.env.BASE_PATH ?? process.env.NEXT_PUBLIC_BASE_PATH ?? "";
     const loginUrl = new URL(`${basePath}/login`, request.url);
     return NextResponse.redirect(loginUrl);
   }
@@ -22,5 +25,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|login|register).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
+

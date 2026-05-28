@@ -36,15 +36,15 @@ export function ColumnMapper({ headers, onMappingChange }: ColumnMapperProps) {
   }, [phone, name, company, onMappingChange]);
 
   const selectClass =
-    "border border-gray-300 rounded px-2 py-1 text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500";
+    "border border-[rgba(37,211,102,0.2)] bg-[#0a0f0d] text-[#e8f5e9] rounded-sm px-2 py-1 text-sm w-full focus:outline-none focus:border-[#25D366] focus:ring-0";
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-gray-700">Mapeamento de colunas</h3>
+      <h3 className="text-sm font-heading tracking-widest uppercase font-semibold text-[#e8f5e9]">Mapeamento de colunas</h3>
       <div className="grid grid-cols-3 gap-3">
         <div>
-          <label className="block text-xs text-gray-500 mb-1">
-            Telefone <span className="text-red-500">*</span>
+          <label className="block font-heading tracking-widest uppercase text-xs text-muted-foreground mb-1">
+            Telefone <span className="text-[#ef4444]">*</span>
           </label>
           <select className={selectClass} value={phone} onChange={(e) => setPhone(e.target.value)}>
             <option value="">— selecione —</option>
@@ -54,7 +54,7 @@ export function ColumnMapper({ headers, onMappingChange }: ColumnMapperProps) {
           </select>
         </div>
         <div>
-          <label className="block text-xs text-gray-500 mb-1">Nome</label>
+          <label className="block font-heading tracking-widest uppercase text-xs text-muted-foreground mb-1">Nome</label>
           <select className={selectClass} value={name} onChange={(e) => setName(e.target.value)}>
             <option value="">— nenhum —</option>
             {headers.map((h) => (
@@ -63,7 +63,7 @@ export function ColumnMapper({ headers, onMappingChange }: ColumnMapperProps) {
           </select>
         </div>
         <div>
-          <label className="block text-xs text-gray-500 mb-1">Empresa</label>
+          <label className="block font-heading tracking-widest uppercase text-xs text-muted-foreground mb-1">Empresa</label>
           <select className={selectClass} value={company} onChange={(e) => setCompany(e.target.value)}>
             <option value="">— nenhum —</option>
             {headers.map((h) => (
@@ -73,12 +73,12 @@ export function ColumnMapper({ headers, onMappingChange }: ColumnMapperProps) {
         </div>
       </div>
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border border-[rgba(37,211,102,0.15)] rounded-sm overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50">
+          <thead className="bg-[rgba(37,211,102,0.05)] border-b border-[rgba(37,211,102,0.15)]">
             <tr>
-              <th className="px-4 py-2 text-left font-medium text-gray-600">Coluna CSV</th>
-              <th className="px-4 py-2 text-left font-medium text-gray-600">Campo do sistema</th>
+              <th className="px-4 py-2 text-left font-heading text-xs tracking-widest uppercase text-[#25D366]">Coluna CSV</th>
+              <th className="px-4 py-2 text-left font-heading text-xs tracking-widest uppercase text-[#25D366]">Campo do sistema</th>
             </tr>
           </thead>
           <tbody>
@@ -86,13 +86,13 @@ export function ColumnMapper({ headers, onMappingChange }: ColumnMapperProps) {
               const field =
                 h === phone ? "phoneNumber" : h === name ? "name" : h === company ? "company" : "customField";
               return (
-                <tr key={h} className="border-t">
-                  <td className="px-4 py-2 text-gray-800">{h}</td>
-                  <td className="px-4 py-2 text-gray-500 text-xs">
-                    {field === "phoneNumber" && <span className="text-green-700 font-medium">Telefone</span>}
-                    {field === "name" && <span className="text-blue-700 font-medium">Nome</span>}
-                    {field === "company" && <span className="text-purple-700 font-medium">Empresa</span>}
-                    {field === "customField" && <span className="text-gray-400">Campo personalizado</span>}
+                <tr key={h} className="border-t border-[rgba(37,211,102,0.08)] hover:bg-[rgba(37,211,102,0.04)] transition-colors">
+                  <td className="px-4 py-2 text-[#e8f5e9]">{h}</td>
+                  <td className="px-4 py-2 text-muted-foreground text-xs">
+                    {field === "phoneNumber" && <span className="text-[#25D366] font-medium">Telefone</span>}
+                    {field === "name" && <span className="text-[#25D366] font-medium">Nome</span>}
+                    {field === "company" && <span className="text-[#25D366] font-medium">Empresa</span>}
+                    {field === "customField" && <span className="text-muted-foreground">Campo personalizado</span>}
                   </td>
                 </tr>
               );

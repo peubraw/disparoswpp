@@ -67,7 +67,7 @@ export function MessageItem({ message }: MessageItemProps) {
               {message.fromPhone}
             </span>
             {!message.isRead && (
-              <span className="h-2 w-2 rounded-full bg-blue-500 flex-shrink-0" />
+              <span className="h-2 w-2 rounded-full bg-[#25D366] flex-shrink-0 animate-pulse" />
             )}
           </div>
           <span className="text-xs text-muted-foreground whitespace-nowrap">

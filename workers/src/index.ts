@@ -21,6 +21,7 @@ const messageSendWorker = new Worker(
   {
     connection,
     concurrency: 5,
+    lockDuration: 300000,
   }
 );
 

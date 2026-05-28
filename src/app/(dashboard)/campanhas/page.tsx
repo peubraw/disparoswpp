@@ -14,13 +14,13 @@ function getStatusBadge(status: CampaignStatus) {
     case "DRAFT":
       return <Badge variant="secondary">Rascunho</Badge>;
     case "SCHEDULED":
-      return <Badge variant="outline" className="bg-blue-50 text-blue-700">Agendada</Badge>;
+      return <Badge variant="outline" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Agendada</Badge>;
     case "RUNNING":
-      return <Badge variant="default" className="bg-green-600">Em Execução</Badge>;
+      return <Badge variant="default" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Em Execução</Badge>;
     case "PAUSED":
-      return <Badge variant="outline" className="bg-amber-100 text-amber-800">Pausada</Badge>;
+      return <Badge variant="outline" className="bg-[rgba(245,158,11,0.1)] text-[#f59e0b] border border-[rgba(245,158,11,0.2)]">Pausada</Badge>;
     case "COMPLETED":
-      return <Badge variant="default" className="bg-gray-800">Concluída</Badge>;
+      return <Badge variant="default" className="bg-[rgba(232,245,233,0.1)] text-[#e8f5e9]">Concluída</Badge>;
     case "FAILED":
       return <Badge variant="destructive">Falhou</Badge>;
     default:

@@ -94,28 +94,46 @@ services:
       EVOLUTION_API_KEY: ${EVOLUTION_API_KEY:-CHANGE_ME}
 
   evolution-api:
-    image: atendai/evolution-api:v2.2.3
+    image: evoapicloud/evolution-api:v2.3.7
     ports:
       - "127.0.0.1:8081:8080"
-    shm_size: "1g"
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY:-EvolutionKey2025Secure}
-      SERVER_URL: http://evolution-api:8080
-      NODE_ENV: production
-      DATABASE_ENABLED: "true"
+      AUTHENTICATION_TYPE: apikey
+      AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES: "true"
+      SERVER_URL: ${EVOLUTION_SERVER_URL:-http://evolution-api:8080}
       DATABASE_PROVIDER: postgresql
       DATABASE_CONNECTION_URI: ${EVOLUTION_DB_URI:-postgresql://disparos:CHANGE_ME@postgres:5432/evolution?schema=public}
-      REDIS_ENABLED: "false"
-      LOG_LEVEL: ERROR
-      LOG_COLOR: "false"
-      LOG_BAILEYS: "error"
-      CONFIG_SESSION_PHONE_VERSION: "2.3000.1035194821"
+      DATABASE_CONNECTION_CLIENT_NAME: evolution
+      DATABASE_SAVE_DATA_INSTANCE: "true"
+      DATABASE_SAVE_DATA_NEW_MESSAGE: "true"
+      DATABASE_SAVE_MESSAGE_UPDATE: "true"
+      DATABASE_SAVE_DATA_CONTACTS: "true"
+      DATABASE_SAVE_DATA_CHATS: "true"
+      DATABASE_SAVE_DATA_HISTORIC: "true"
+      DATABASE_SAVE_DATA_LABELS: "true"
+      DATABASE_SAVE_IS_ON_WHATSAPP: "true"
+      DATABASE_SAVE_IS_ON_WHATSAPP_DAYS: "7"
+      CACHE_REDIS_ENABLED: "false"
+      CACHE_LOCAL_ENABLED: "true"
+      CACHE_LOCAL_TTL: "86400"
       DEL_INSTANCE: "false"
-      WEBHOOK_GLOBAL_ENABLED: "false"
+      DEL_TEMP_INSTANCES: "true"
+      QRCODE_LIMIT: 30
+      LOG_LEVEL: ERROR,WARN,INFO
+      LOG_COLOR: "true"
+      LOG_BAILEYS: error
+      LANGUAGE: pt-BR
+      TZ: America/Sao_Paulo
     volumes:
       - evolution_instances:/evolution/instances
+      - evolution_store:/evolution/store
 
 volumes:
   postgres_data:
   redis_data:
   evolution_instances:
+  evolution_store:

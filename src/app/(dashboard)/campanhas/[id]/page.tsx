@@ -10,10 +10,10 @@ import { CampaignActions } from "@/components/campaigns/campaign-actions";
 function getStatusBadge(status: CampaignStatus) {
   switch (status) {
     case "DRAFT": return <Badge variant="secondary">Rascunho</Badge>;
-    case "SCHEDULED": return <Badge variant="outline" className="bg-blue-50 text-blue-700">Agendada</Badge>;
-    case "RUNNING": return <Badge variant="default" className="bg-green-600">Em Execução</Badge>;
-    case "PAUSED": return <Badge variant="outline" className="bg-amber-100 text-amber-800">Pausada</Badge>;
-    case "COMPLETED": return <Badge variant="default" className="bg-gray-800">Concluída</Badge>;
+    case "SCHEDULED": return <Badge variant="outline" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Agendada</Badge>;
+    case "RUNNING": return <Badge variant="default" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Em Execução</Badge>;
+    case "PAUSED": return <Badge variant="outline" className="bg-[rgba(245,158,11,0.1)] text-[#f59e0b] border border-[rgba(245,158,11,0.2)]">Pausada</Badge>;
+    case "COMPLETED": return <Badge variant="default" className="bg-[rgba(232,245,233,0.1)] text-[#e8f5e9]">Concluída</Badge>;
     case "FAILED": return <Badge variant="destructive">Falhou</Badge>;
     default: return <Badge variant="secondary">{status}</Badge>;
   }
@@ -22,9 +22,9 @@ function getStatusBadge(status: CampaignStatus) {
 function getMessageStatusBadge(status: MessageStatus) {
   switch (status) {
     case "PENDING": return <Badge variant="secondary">Pendente</Badge>;
-    case "SENT": return <Badge variant="outline" className="bg-blue-50 text-blue-700">Enviada</Badge>;
-    case "DELIVERED": return <Badge variant="default" className="bg-blue-600">Entregue</Badge>;
-    case "READ": return <Badge variant="default" className="bg-green-600">Lida</Badge>;
+    case "SENT": return <Badge variant="outline" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Enviada</Badge>;
+    case "DELIVERED": return <Badge variant="default" className="bg-[rgba(37,211,102,0.1)] border border-[rgba(37,211,102,0.4)] text-[#25D366]">Entregue</Badge>;
+    case "READ": return <Badge variant="default" className="bg-[rgba(37,211,102,0.1)] text-[#25D366] border border-[rgba(37,211,102,0.2)]">Lida</Badge>;
     case "FAILED": return <Badge variant="destructive">Falhou</Badge>;
     default: return <Badge variant="secondary">{status}</Badge>;
   }
