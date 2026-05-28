@@ -71,6 +71,58 @@ export async function deleteContact(contactId: string, listId: string) {
   return { success: true };
 }
 
+const importFromInstanceSchema = z.object({
+  listId: z.string().min(1),
+  instanceName: z.string().min(1),
+});
+
+export async function importFromInstance(listId: string, instanceName: string) {
+  const user = await getCurrentUser();
+
+  const parsed = importFromInstanceSchema.safeParse({ listId, instanceName });
+  if (!parsed.success) return { error: "Dados inválidos." };
+
+  const list = await prisma.contactList.findFirst({
+    where: { id: parsed.data.listId, userId: user.id },
+  });
+  if (!list) return { error: "Lista não encontrada." };
+
+  let contacts: Array<{ remoteJid: string; pushName: string | null }>;
+  try {
+    contacts = await evolutionClient.fetchContacts(parsed.data.instanceName);
+  } catch {
+    return { error: "Não foi possível buscar contatos. Verifique se a instância está conectada." };
+  }
+
+  const toImport = contacts
+    .filter((c) => c.remoteJid && !c.remoteJid.includes("@g.us") && c.remoteJid !== "0@s.whatsapp.net")
+    .map((c) => {
+      const digits = c.remoteJid.replace(/@s\.whatsapp\.net$/, "").replace(/\D/g, "");
+      const phone = digits.length < 12 ? `55${digits}` : digits;
+      return { phone, name: c.pushName?.trim() || null };
+    })
+    .filter((c) => c.phone.length >= 10);
+
+  if (toImport.length === 0) return { imported: 0, total: 0 };
+
+  let imported = 0;
+  for (const contact of toImport) {
+    try {
+      await prisma.contact.upsert({
+        where: { contactListId_phoneNumber: { contactListId: parsed.data.listId, phoneNumber: contact.phone } },
+        update: contact.name ? { name: contact.name } : {},
+        create: { contactListId: parsed.data.listId, phoneNumber: contact.phone, name: contact.name },
+      });
+      imported++;
+    } catch {
+      // intentional: skip individual upsert failures (duplicates, constraint errors)
+    }
+  }
+
+  revalidatePath(`/contatos/${parsed.data.listId}`);
+  return { imported, total: toImport.length };
+}
+
 const validateNumbersSchema = z.object({
   listId: z.string().min(1),
   instanceName: z.string().min(1),

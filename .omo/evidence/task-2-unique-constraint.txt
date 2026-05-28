@@ -1,0 +1,20 @@
+Schema update: prisma/schema.prisma
+- Added @@unique([contactListId, phoneNumber]) to Contact model.
+- Preserved existing @@index([contactListId]).
+
+Migration attempt:
+- Command: npx prisma migrate dev --name unique_contact_phone
+- Result: failed before DB access because DATABASE_URL was not available to Prisma config.
+
+Retry attempt:
+- Command: $env:DATABASE_URL='postgresql://disparos:DisparosPwd2025!@localhost:5433/disparoswpp'; npx prisma migrate dev --name unique_contact_phone
+- Result: P1001, can't reach database server at localhost:5433.
+
+Final successful migration:
+- Command: $env:DATABASE_URL='postgresql://postgres:postgres@127.0.0.1:5432/disparoswpp'; npx prisma migrate dev --name unique_contact_phone
+- Result: exit 0, migration 20260528073800_unique_contact_phone applied successfully.
+
+Verification attempts:
+- npx tsc --noEmit: passed with exit code 0.
+- docker exec psql verification: not possible because Docker daemon is unavailable in this environment.
+- psql verification: index Contact_contactListId_phoneNumber_key exists on Contact(contactListId, phoneNumber).

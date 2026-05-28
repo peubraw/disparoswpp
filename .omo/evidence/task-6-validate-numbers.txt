@@ -1,0 +1,17 @@
+Task 6: validate WhatsApp numbers
+
+Changed:
+- src/actions/contacts.ts
+- src/app/(dashboard)/contatos/[listId]/page.tsx
+- src/components/contacts/validate-contact-list-numbers-button.tsx
+- src/app/api/contacts/import/route.ts
+
+Result:
+- Added validateContactListNumbers(listId, instanceName)
+- Uses evolutionClient.validateNumbers() in batches of 50
+- Stores validation result in customFields.whatsappValid
+- Returns valid/invalid/total counts
+- Added Validar Números button with loading state
+
+Typecheck:
+- npx tsc --noEmit ✅

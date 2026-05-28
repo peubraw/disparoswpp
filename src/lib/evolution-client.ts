@@ -103,6 +103,16 @@ export class EvolutionClient {
     });
   }
 
+  async fetchContacts(
+    instanceName: string,
+  ): Promise<Array<{ remoteJid: string; pushName: string | null }>> {
+    return this.request<Array<{ remoteJid: string; pushName: string | null }>>({
+      method: "POST",
+      url: `/chat/findContacts/${encodeURIComponent(instanceName)}`,
+      data: {},
+    });
+  }
+
   async validateNumbers(
     instanceName: string,
     phones: string[],

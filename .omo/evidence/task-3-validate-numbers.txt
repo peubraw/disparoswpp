@@ -1,1 +1,5 @@
+Method signature:
 validateNumbers(instanceName: string, phones: string[]): Promise<Array<{ number: string; exists: boolean }>>
+
+TypeScript check:
+PASS (npx tsc --noEmit)

@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { AddContactButton } from "@/components/contacts/add-contact-button";
 import { DeleteContactButton } from "@/components/contacts/delete-contact-button";
 import { ValidateContactListNumbersButton } from "@/components/contacts/validate-contact-list-numbers-button";
+import { ImportFromInstanceButton } from "@/components/contacts/import-from-instance-button";
 import { WaInstanceStatus } from "@prisma/client";
 
 const PAGE_SIZE = 50;
@@ -56,6 +57,7 @@ export default async function ContactListPage({ params, searchParams }: PageProp
           <span className="text-sm text-muted-foreground">({total.toLocaleString("pt-BR")} contatos)</span>
         </div>
         <div className="flex items-center gap-3">
+          <ImportFromInstanceButton listId={listId} instanceName={connectedInstance?.instanceName ?? null} />
           <ValidateContactListNumbersButton listId={listId} instanceName={connectedInstance?.instanceName ?? null} />
           <AddContactButton listId={listId} />
         </div>

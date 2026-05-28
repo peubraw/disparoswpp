@@ -1,0 +1,8 @@
+Implemented Retomar button for PAUSED campaigns in src/components/campaigns/campaign-actions.tsx.
+- Imported resumeCampaign from @/actions/campaigns.
+- Split DRAFT and PAUSED actions:
+  - DRAFT -> Iniciar -> startCampaign(campaignId)
+  - PAUSED -> Retomar -> resumeCampaign(campaignId)
+- Kept existing DeleteCampaignButton unchanged.
+Verification:
+- TypeScript check pending/ran separately via npx tsc --noEmit.
