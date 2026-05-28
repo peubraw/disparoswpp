@@ -5,6 +5,7 @@ import { evolutionClient } from "@/lib/evolution-client";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { WaInstanceStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { configureWebhook } from "./webhook-config";
 
 const MAX_INSTANCES = 5;
 
@@ -21,6 +22,10 @@ export async function createInstance(name: string) {
   } catch {
     return { error: "Erro ao criar instância na Evolution API." };
   }
+
+  try {
+    await configureWebhook(name);
+  } catch {}
 
   const instance = await prisma.waInstance.create({
     data: {

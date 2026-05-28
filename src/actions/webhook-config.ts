@@ -9,9 +9,9 @@ const WEBHOOK_EVENTS = [
 ];
 
 export async function configureWebhook(instanceName: string): Promise<void> {
-  const webhookUrl = process.env.NEXTAUTH_URL
-    ? `${process.env.NEXTAUTH_URL}/api/webhooks/evolution`
-    : `http://localhost:3001/api/webhooks/evolution`;
+  const base = process.env.NEXTAUTH_URL ?? `http://localhost:3001`;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const webhookUrl = `${base}${basePath}/api/webhooks/evolution`;
 
   await evolutionClient.setWebhook(instanceName, webhookUrl, WEBHOOK_EVENTS);
 }
