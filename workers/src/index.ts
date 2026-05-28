@@ -40,21 +40,19 @@ const campaignSchedulerWorker = new Worker(
 );
 
 messageSendWorker.on("completed", (job) => {
-  void job;
+  console.log(`[message-send] completed: ${job.name} ${job.id}`);
 });
 
 messageSendWorker.on("failed", (job, err) => {
-  void job;
-  void err;
+  console.error(`[message-send] failed: ${job?.name} ${job?.id} — ${err.message}`);
 });
 
 campaignSchedulerWorker.on("completed", (job) => {
-  void job;
+  console.log(`[campaign-scheduler] completed: ${job.name} ${job.id}`);
 });
 
 campaignSchedulerWorker.on("failed", (job, err) => {
-  void job;
-  void err;
+  console.error(`[campaign-scheduler] failed: ${job?.name} ${job?.id} — ${err.message}`);
 });
 
 async function shutdown() {
@@ -66,3 +64,5 @@ async function shutdown() {
 
 process.on("SIGTERM", () => void shutdown());
 process.on("SIGINT", () => void shutdown());
+
+console.log("Worker started: listening on message-send + campaign-scheduler");
