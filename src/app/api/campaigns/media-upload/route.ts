@@ -54,7 +54,8 @@ export async function POST(req: NextRequest) {
     const url = `/uploads/${session.user.id}/${filename}`;
 
     return NextResponse.json({ url });
-  } catch {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } catch (err) {
+    console.error("[media-upload] error:", err);
+    return NextResponse.json({ error: "Internal Server Error", detail: String(err) }, { status: 500 });
   }
 }
