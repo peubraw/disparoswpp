@@ -34,7 +34,15 @@ export async function processSendMessage(job: Job<SendMessageJobData>) {
     include: { campaign: true },
   });
   if (!message) return;
-  if (message.campaign.status !== "RUNNING") return;
+  if (message.campaign.status !== "RUNNING") {
+    if (message.status === MessageStatus.PENDING) {
+      await prisma.message.update({
+        where: { id: messageId },
+        data: { status: MessageStatus.FAILED, errorMessage: "Campanha pausada/cancelada antes do envio" },
+      });
+    }
+    return;
+  }
 
   const vars: Record<string, string | undefined> = {
     nome: contactName,

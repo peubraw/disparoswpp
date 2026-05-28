@@ -23,7 +23,7 @@ export async function processFinalCampaign(job: Job<FinalizeCampaignJobData>) {
   });
 
   if (!campaign) return;
-  if (campaign.status === CampaignStatus.PAUSED || campaign.status === CampaignStatus.FAILED) return;
+  if (campaign.status === CampaignStatus.FAILED) return;
   if (campaign.status === CampaignStatus.COMPLETED) return;
 
   const pendingCount = await prisma.message.count({

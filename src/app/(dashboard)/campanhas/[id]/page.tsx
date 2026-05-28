@@ -52,6 +52,8 @@ export default async function CampanhaDetailPage({ params }: { params: Promise<{
     notFound();
   }
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   const stats = await prisma.message.groupBy({
     by: ["status"],
     where: { campaignId: campaign.id },
@@ -145,16 +147,16 @@ export default async function CampanhaDetailPage({ params }: { params: Promise<{
                 <div className="pt-2 space-y-1">
                   <span className="text-muted-foreground text-xs uppercase tracking-widest font-heading">Arquivo anexado:</span>
                   {campaign.mediaType === MediaType.IMAGE && (
-                    <img src={campaign.mediaUrl} alt="Imagem da campanha" className="max-w-xs rounded-md border border-[rgba(37,211,102,0.2)]" />
+                    <img src={`${basePath}${campaign.mediaUrl}`} alt="Imagem da campanha" className="max-w-xs rounded-md border border-[rgba(37,211,102,0.2)]" />
                   )}
                   {campaign.mediaType === MediaType.VIDEO && (
-                    <video src={campaign.mediaUrl} controls className="max-w-xs rounded-md border border-[rgba(37,211,102,0.2)]" />
+                    <video src={`${basePath}${campaign.mediaUrl}`} controls className="max-w-xs rounded-md border border-[rgba(37,211,102,0.2)]" />
                   )}
                   {campaign.mediaType === MediaType.AUDIO && (
-                    <audio src={campaign.mediaUrl} controls className="w-full" />
+                    <audio src={`${basePath}${campaign.mediaUrl}`} controls className="w-full" />
                   )}
                   {campaign.mediaType === MediaType.DOCUMENT && (
-                    <a href={campaign.mediaUrl} target="_blank" rel="noreferrer" className="text-[#25D366] underline text-sm font-mono">
+                    <a href={`${basePath}${campaign.mediaUrl}`} target="_blank" rel="noreferrer" className="text-[#25D366] underline text-sm font-mono">
                       📄 Abrir documento
                     </a>
                   )}
