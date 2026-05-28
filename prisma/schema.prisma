@@ -86,6 +86,7 @@ model Contact {
   createdAt     DateTime    @default(now())
 
   @@index([contactListId])
+  @@unique([contactListId, phoneNumber])
 }
 
 model Campaign {
