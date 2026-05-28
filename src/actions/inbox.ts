@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth-utils";
+import { messageSendQueue } from "@/lib/queues";
 import { revalidatePath } from "next/cache";
 
 export async function getInboxMessages(instanceId?: string) {
@@ -62,4 +63,37 @@ export async function markAllAsRead(instanceId?: string) {
   
   revalidatePath("/inbox");
   return { success: true };
+}
+
+export async function sendReply(inboxMessageId: string, text: string) {
+  const user = await getCurrentUser();
+
+  try {
+    const message = await prisma.inboxMessage.findFirst({
+      where: {
+        id: inboxMessageId,
+        waInstance: { userId: user.id },
+      },
+      select: {
+        id: true,
+        fromPhone: true,
+        waInstance: {
+          select: { instanceName: true },
+        },
+      },
+    });
+
+    if (!message) return { error: "Mensagem não encontrada." };
+
+    await messageSendQueue.add("send-reply", {
+      inboxMessageId: message.id,
+      instanceName: message.waInstance.instanceName,
+      remoteJid: message.fromPhone,
+      text,
+    });
+
+    return { success: true };
+  } catch {
+    return { error: "Não foi possível enviar a resposta." };
+  }
 }

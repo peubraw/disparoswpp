@@ -1,0 +1,15 @@
+Task 12 evidence
+
+Changed file:
+- src/actions/inbox.ts
+
+Implemented:
+- sendReply(inboxMessageId, text)
+- ownership check via inboxMessage -> waInstance.userId
+- enqueue send-reply job on messageSendQueue
+
+Typecheck:
+- npx tsc --noEmit ✅
+
+Notes:
+- LSP diagnostics could not be collected because the TypeScript LSP server exited with code -4058.
