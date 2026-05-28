@@ -70,4 +70,12 @@ export async function processCampaignDispatch(job: Job<{ campaignId: string; use
     const progress = Math.round((Math.min(i + CHUNK_SIZE, contacts.length) / contacts.length) * 100);
     await job.updateProgress(progress);
   }
+
+  const totalDelay = contacts.length > 0 ? (contacts.length - 1) * campaign.throttleDelay : 0;
+
+  await messageSendQueue.add(
+    "finalize-campaign",
+    { campaignId },
+    { delay: totalDelay + 60000 }
+  );
 }

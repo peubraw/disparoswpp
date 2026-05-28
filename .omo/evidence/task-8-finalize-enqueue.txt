@@ -1,0 +1,5 @@
+Task 8 verification
+
+- File updated: workers/src/workers/campaign-worker.ts
+- Change: enqueue finalize-campaign after dispatch loop with 60s buffer
+- Type check: `npx tsc --noEmit` in workers/ completed successfully
