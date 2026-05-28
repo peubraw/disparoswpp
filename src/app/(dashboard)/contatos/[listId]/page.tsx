@@ -28,7 +28,7 @@ export default async function ContactListPage({ params, searchParams }: PageProp
   });
   if (!list) notFound();
 
-  const connectedInstance = await prisma.waInstance.findFirst({
+  const connectedInstances = await prisma.waInstance.findMany({
     where: { userId: user.id, status: WaInstanceStatus.CONNECTED },
     orderBy: { createdAt: "asc" },
     select: { instanceName: true },
@@ -57,8 +57,8 @@ export default async function ContactListPage({ params, searchParams }: PageProp
           <span className="text-sm text-muted-foreground">({total.toLocaleString("pt-BR")} contatos)</span>
         </div>
         <div className="flex items-center gap-3">
-          <ImportFromInstanceButton listId={listId} instanceName={connectedInstance?.instanceName ?? null} />
-          <ValidateContactListNumbersButton listId={listId} instanceName={connectedInstance?.instanceName ?? null} />
+          <ImportFromInstanceButton listId={listId} instances={connectedInstances.map(i => i.instanceName)} />
+          <ValidateContactListNumbersButton listId={listId} instanceName={connectedInstances[0]?.instanceName ?? null} />
           <AddContactButton listId={listId} />
         </div>
       </div>
