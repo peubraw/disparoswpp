@@ -1,0 +1,25 @@
+Task 1 - dedup_contacts migration
+
+Migration file:
+- prisma/migrations/20260528071435_dedup_contacts/migration.sql
+
+SQL applied:
+- DELETE FROM "Contact" WHERE id NOT IN (
+    SELECT MIN(id) FROM "Contact" GROUP BY "contactListId", "phoneNumber"
+  );
+
+Counts:
+- Before: 0
+- After: 0
+- Duplicate groups after: 0
+
+Migration output:
+- Loaded Prisma config from prisma.config.ts.
+- Prisma schema loaded from prisma\schema.prisma.
+- Datasource "db": PostgreSQL database "disparoswpp", schema "public" at "localhost:5432"
+- Applying migration `0001_init`
+- Applying migration `20260528071435_dedup_contacts`
+- Your database is now in sync with your schema.
+
+Notes:
+- The local target database was empty for Contact rows when migration ran.
