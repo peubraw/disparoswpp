@@ -4,6 +4,8 @@ import { getCurrentUser } from "@/lib/auth-utils";
 import { prisma } from "@/lib/prisma";
 import { AddContactButton } from "@/components/contacts/add-contact-button";
 import { DeleteContactButton } from "@/components/contacts/delete-contact-button";
+import { ValidateContactListNumbersButton } from "@/components/contacts/validate-contact-list-numbers-button";
+import { WaInstanceStatus } from "@prisma/client";
 
 const PAGE_SIZE = 50;
 
@@ -24,6 +26,12 @@ export default async function ContactListPage({ params, searchParams }: PageProp
     where: { id: listId, userId: user.id },
   });
   if (!list) notFound();
+
+  const connectedInstance = await prisma.waInstance.findFirst({
+    where: { userId: user.id, status: WaInstanceStatus.CONNECTED },
+    orderBy: { createdAt: "asc" },
+    select: { instanceName: true },
+  });
 
   const [contacts, total] = await Promise.all([
     prisma.contact.findMany({
@@ -47,7 +55,10 @@ export default async function ContactListPage({ params, searchParams }: PageProp
           <h1 className="text-2xl font-heading tracking-widest uppercase font-bold text-[#e8f5e9]">{list.name}</h1>
           <span className="text-sm text-muted-foreground">({total.toLocaleString("pt-BR")} contatos)</span>
         </div>
-        <AddContactButton listId={listId} />
+        <div className="flex items-center gap-3">
+          <ValidateContactListNumbersButton listId={listId} instanceName={connectedInstance?.instanceName ?? null} />
+          <AddContactButton listId={listId} />
+        </div>
       </div>
 
       {contacts.length === 0 ? (
