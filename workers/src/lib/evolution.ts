@@ -43,6 +43,6 @@ export class EvolutionClient {
 }
 
 export const evolutionClient = new EvolutionClient(
-  process.env.EVOLUTION_API_URL ?? "http://evolution-api:8081",
+  process.env.EVOLUTION_API_URL ?? "http://evolution-api:8080",
   process.env.EVOLUTION_API_KEY ?? "",
 );

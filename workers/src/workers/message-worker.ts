@@ -42,12 +42,15 @@ export async function processSendMessage(job: Job<SendMessageJobData>) {
 
   const text = interpolateTemplate(messageTemplate, vars);
 
+  const digits = contactPhone.replace(/\D/g, "");
+  const normalizedPhone = digits.length < 12 ? `55${digits}` : digits;
+
   let evolutionMessageId: string | undefined;
 
   try {
     if (mediaType !== MediaType.NONE && mediaUrl) {
       const result = await evolutionClient.sendMedia(instanceName, {
-        number: contactPhone,
+        number: normalizedPhone,
         mediatype: mediaType.toLowerCase(),
         mimetype: getMimeType(mediaType),
         media: mediaUrl,
@@ -55,7 +58,7 @@ export async function processSendMessage(job: Job<SendMessageJobData>) {
       });
       evolutionMessageId = result?.key?.id;
     } else {
-      const result = await evolutionClient.sendText(instanceName, contactPhone, text);
+      const result = await evolutionClient.sendText(instanceName, normalizedPhone, text);
       evolutionMessageId = result?.key?.id;
     }
 
