@@ -89,6 +89,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
+    volumes:
+      - uploads_data:/app/public/uploads
     environment:
       DATABASE_URL: ${DATABASE_URL:-postgresql://disparos:CHANGE_ME@postgres:5432/disparoswpp}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
@@ -96,6 +98,7 @@ services:
       EVOLUTION_API_KEY: ${EVOLUTION_API_KEY:-CHANGE_ME}
       NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3001}
       NEXT_PUBLIC_BASE_PATH: ${NEXT_PUBLIC_BASE_PATH:-}
+      UPLOADS_PATH: /app/public/uploads
 
   evolution-api:
     image: evoapicloud/evolution-api:v2.3.7

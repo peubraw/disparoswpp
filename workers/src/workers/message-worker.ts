@@ -3,6 +3,8 @@ import { prisma } from "../lib/prisma";
 import { evolutionClient } from "../lib/evolution";
 import { interpolateTemplate } from "../lib/interpolate";
 import { MessageStatus, MediaType } from "@prisma/client";
+import fs from "fs";
+import path from "path";
 
 interface SendMessageJobData {
   messageId: string;
@@ -49,15 +51,25 @@ export async function processSendMessage(job: Job<SendMessageJobData>) {
 
   try {
     if (mediaType !== MediaType.NONE && mediaUrl) {
-      const absoluteMediaUrl = mediaUrl.startsWith("http")
-        ? mediaUrl
-        : `${(process.env.NEXTAUTH_URL ?? "").replace(/\/$/, "")}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${mediaUrl}`;
+      const uploadsRoot = process.env.UPLOADS_PATH ?? "/app/public/uploads";
+      const relativePath = mediaUrl.replace(/^\/uploads\//, "");
+      const filePath = path.join(uploadsRoot, relativePath);
+
+      let mediaBase64: string;
+      if (fs.existsSync(filePath)) {
+        mediaBase64 = fs.readFileSync(filePath).toString("base64");
+      } else {
+        const absoluteMediaUrl = mediaUrl.startsWith("http")
+          ? mediaUrl
+          : `${(process.env.NEXTAUTH_URL ?? "").replace(/\/$/, "")}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${mediaUrl}`;
+        mediaBase64 = absoluteMediaUrl;
+      }
 
       const result = await evolutionClient.sendMedia(instanceName, {
         number: normalizedPhone,
         mediatype: mediaType.toLowerCase(),
         mimetype: getMimeType(mediaType),
-        media: absoluteMediaUrl,
+        media: mediaBase64,
         caption: text,
       });
       evolutionMessageId = result?.key?.id;
