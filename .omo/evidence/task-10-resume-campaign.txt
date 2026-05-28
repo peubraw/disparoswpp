@@ -1,0 +1,19 @@
+Task 10: resumeCampaign server action
+
+Implemented in src/actions/campaigns.ts:
+- Added resumeCampaign(campaignId)
+- Ownership check via getCurrentUser + campaign.userId
+- Requires campaign status to be PAUSED
+- Fetches pending Message rows for the campaign
+- Resolves matching Contact records by phone within the campaign contact lists
+- Updates campaign to RUNNING before enqueueing
+- Enqueues one send-message job per pending message with staggered delay
+- Does not create new Message rows
+- Does not call startCampaign
+
+Verification:
+- npx tsc --noEmit ✅
+
+Notes:
+- Revalidated /campanhas and /campanhas/{campaignId}
+- Job payload matches workers/src/workers/message-worker.ts

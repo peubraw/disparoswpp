@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { messageSendQueue, campaignSchedulerQueue } from "@/lib/queues";
-import { CampaignStatus, WaInstanceStatus, MediaType } from "@prisma/client";
+import { CampaignStatus, WaInstanceStatus, MediaType, MessageStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { evolutionClient } from "@/lib/evolution-client";
@@ -138,6 +138,91 @@ export async function pauseCampaign(campaignId: string) {
   });
 
   revalidatePath("/campanhas");
+  return { success: true };
+}
+
+export async function resumeCampaign(campaignId: string) {
+  const user = await getCurrentUser();
+
+  const campaign = await prisma.campaign.findFirst({
+    where: { id: campaignId, userId: user.id },
+    include: {
+      waInstance: true,
+      contactLists: {
+        select: { contactListId: true },
+      },
+    },
+  });
+
+  if (!campaign) return { error: "Campanha não encontrada." };
+  if (campaign.status !== CampaignStatus.PAUSED) {
+    return { error: "A campanha precisa estar pausada para ser retomada." };
+  }
+
+  const pendingMessages = await prisma.message.findMany({
+    where: { campaignId, status: MessageStatus.PENDING },
+    orderBy: { createdAt: "asc" },
+  });
+
+  const contactListIds = campaign.contactLists.map(({ contactListId }) => contactListId);
+  const jobs = [] as Array<{
+    messageId: string;
+    contactPhone: string;
+    contactName?: string;
+    contactCustomFields: Record<string, string | undefined>;
+    instanceName: string;
+    messageTemplate: string;
+    mediaUrl?: string;
+    mediaType: MediaType;
+  }>;
+
+  for (const message of pendingMessages) {
+    const contact = await prisma.contact.findFirst({
+      where: {
+        contactListId: { in: contactListIds },
+        phoneNumber: message.contactPhone,
+      },
+    });
+
+    if (!contact) {
+      return { error: "Contato não encontrado para uma das mensagens pendentes." };
+    }
+
+    const customFields =
+      contact.customFields && typeof contact.customFields === "object" && !Array.isArray(contact.customFields)
+        ? (contact.customFields as Record<string, string | undefined>)
+        : {};
+
+    jobs.push({
+      messageId: message.id,
+      contactPhone: message.contactPhone,
+      contactName: contact.name ?? undefined,
+      contactCustomFields: customFields,
+      instanceName: campaign.waInstance.instanceName,
+      messageTemplate: campaign.messageTemplate,
+      mediaUrl: campaign.mediaUrl ?? undefined,
+      mediaType: campaign.mediaType,
+    });
+  }
+
+  await prisma.campaign.update({
+    where: { id: campaignId },
+    data: { status: CampaignStatus.RUNNING },
+  });
+
+  for (const [index, jobData] of jobs.entries()) {
+    await messageSendQueue.add(
+      "send-message",
+      jobData,
+      {
+        delay: index * campaign.throttleDelay,
+        jobId: jobData.messageId,
+      }
+    );
+  }
+
+  revalidatePath("/campanhas");
+  revalidatePath(`/campanhas/${campaignId}`);
   return { success: true };
 }
 
