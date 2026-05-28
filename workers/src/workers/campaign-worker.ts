@@ -53,6 +53,7 @@ export async function processCampaignDispatch(job: Job<{ campaignId: string; use
         "send-message",
         {
           messageId: message.id,
+          campaignId,
           contactPhone: contact.phoneNumber,
           contactName: contact.name ?? undefined,
           contactCustomFields: (contact.customFields as Record<string, string | undefined>) ?? {},

@@ -68,6 +68,10 @@ export async function markAllAsRead(instanceId?: string) {
 export async function sendReply(inboxMessageId: string, text: string) {
   const user = await getCurrentUser();
 
+  if (!text.trim()) {
+    return { error: "A mensagem não pode estar vazia." };
+  }
+
   try {
     const message = await prisma.inboxMessage.findFirst({
       where: {
@@ -86,10 +90,9 @@ export async function sendReply(inboxMessageId: string, text: string) {
     if (!message) return { error: "Mensagem não encontrada." };
 
     await messageSendQueue.add("send-reply", {
-      inboxMessageId: message.id,
       instanceName: message.waInstance.instanceName,
-      remoteJid: message.fromPhone,
-      text,
+      toPhone: message.fromPhone,
+      text: text.trim(),
     });
 
     return { success: true };

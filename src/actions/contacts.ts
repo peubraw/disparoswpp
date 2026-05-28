@@ -105,34 +105,39 @@ export async function validateContactListNumbers(listId: string, instanceName: s
   let valid = 0;
   let invalid = 0;
 
-  for (let index = 0; index < list.contacts.length; index += 50) {
-    const batch = list.contacts.slice(index, index + 50);
-    const phones = batch.map((contact) => contact.phoneNumber);
-    const results = await evolutionClient.validateNumbers(parsed.data.instanceName, phones);
-    const existsByNumber = new Map(results.map((result) => [result.number, result.exists]));
+  try {
+    for (let index = 0; index < list.contacts.length; index += 50) {
+      const batch = list.contacts.slice(index, index + 50);
+      const phones = batch.map((contact) => contact.phoneNumber);
+      const results = await evolutionClient.validateNumbers(parsed.data.instanceName, phones);
+      const existsByNumber = new Map(results.map((result) => [result.number, result.exists]));
 
-    await Promise.all(
-      batch.map(async (contact) => {
-        const isValid = existsByNumber.get(contact.phoneNumber) ?? false;
-        if (isValid) valid += 1;
-        else invalid += 1;
+      await Promise.all(
+        batch.map(async (contact) => {
+          const isValid = existsByNumber.get(contact.phoneNumber) ?? false;
+          if (isValid) valid += 1;
+          else invalid += 1;
 
-        const customFields =
-          contact.customFields && typeof contact.customFields === "object" && !Array.isArray(contact.customFields)
-            ? (contact.customFields as Record<string, unknown>)
-            : {};
+          const customFields =
+            contact.customFields && typeof contact.customFields === "object" && !Array.isArray(contact.customFields)
+              ? (contact.customFields as Record<string, unknown>)
+              : {};
 
-        await prisma.contact.update({
-          where: { id: contact.id },
-          data: {
-            customFields: {
-              ...customFields,
-              whatsappValid: isValid ? "true" : "false",
+          await prisma.contact.update({
+            where: { id: contact.id },
+            data: {
+              customFields: {
+                ...customFields,
+                whatsappValid: isValid ? "true" : "false",
+              },
             },
-          },
-        });
-      }),
-    );
+          });
+        }),
+      );
+    }
+  } catch (err) {
+    console.error("Erro ao validar números:", err);
+    return { error: "Não foi possível validar os números. Verifique se a instância está conectada." };
   }
 
   revalidatePath(`/contatos/${parsed.data.listId}`);
