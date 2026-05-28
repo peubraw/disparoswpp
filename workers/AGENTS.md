@@ -38,7 +38,7 @@ startCampaign (action)
 |------|------|
 | `src/index.ts` | Entry: creates workers, registers SIGTERM/SIGINT shutdown |
 | `src/workers/campaign-worker.ts` | `processCampaignDispatch` — chunk size 100, own Redis+Queue instance |
-| `src/workers/message-worker.ts` | `processSendMessage` — template interpolation + Evolution API call |
+| `src/workers/message-worker.ts` | `processSendMessage` — phone normalization (digits < 12 → `55${digits}`), template interpolation + Evolution API sendText/sendMedia |
 | `src/workers/scheduled-campaign-worker.ts` | `processScheduledCampaign` — triggers dispatch at scheduled time |
 | `src/lib/prisma.ts` | Isolated Prisma client (duplicate of src/lib — intentional) |
 | `src/lib/evolution.ts` | Isolated Evolution client (duplicate — intentional) |

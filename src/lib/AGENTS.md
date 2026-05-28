@@ -22,7 +22,7 @@ This codebase has **two parallel campaign dispatch implementations**:
 | Runtime | In-process (Next.js server) | Standalone Docker container |
 | Concurrency | 1 | 5 (message-send worker) |
 | Throttle | `setTimeout` sleep per message | Staggered `delay` on enqueued jobs |
-| Phone normalization | Yes (`normalizePhone`, adds `55` prefix) | No |
+| Phone normalization | Yes (`normalizePhone`, adds `55` prefix) | Yes (digits < 12 → `55${digits}`) |
 | Logging | `console.log/error` | No-op event handlers |
 | Lock duration | 300s | Not set (default) |
 

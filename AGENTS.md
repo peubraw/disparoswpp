@@ -1,8 +1,8 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-05-27
+**Generated:** 2026-05-28
 **Branch:** main
-**Stack:** Next.js 16 + React 19 + TypeScript + Prisma 7 + PostgreSQL + Redis + BullMQ + NextAuth v5 + Evolution API + shadcn/ui
+**Stack:** Next.js 16 + React 19 + TypeScript + Prisma 7 + PostgreSQL + Redis + BullMQ + NextAuth v5 + Evolution API v2.3.7 + shadcn/ui
 
 ## OVERVIEW
 WhatsApp bulk messaging platform (disparos = "blasts"). Users manage WA instances via Evolution API, build contact lists, run throttled campaigns, and receive inbound messages in an inbox. Two runtimes: Next.js app (port 3001) + standalone Node worker process consuming BullMQ queues.
@@ -47,7 +47,7 @@ disparoswpp/
 | Campaign dispatch logic | `workers/src/workers/campaign-worker.ts` | Chunks of 100, throttleDelay per message |
 | Message sending | `workers/src/workers/message-worker.ts` | Interpolates template vars |
 | Scheduled campaign trigger | `workers/src/workers/scheduled-campaign-worker.ts` | Calls startCampaign equivalent |
-| DB schema | `prisma/schema.prisma` | 7 models: User, WaInstance, ContactList, Contact, Campaign, Message, InboxMessage |
+| DB schema | `prisma/schema.prisma` | 8 models: User, WaInstance, ContactList, Contact, Campaign, CampaignContactList, Message, InboxMessage |
 | Auth config | `src/auth.ts` | NextAuth v5, JWT strategy, credentials only |
 | Auth guard | `src/middleware.ts` | Uses `getToken` (NOT `auth()`), cookie name differs prod/dev |
 | UI primitives | `src/components/ui/` | shadcn/ui - regenerate via `npx shadcn add`, don't hand-edit |
@@ -76,7 +76,7 @@ All mutations are `"use server"` functions in `src/actions/`. Pattern:
 - `@prisma/adapter-pg` used (not default connector) — see `src/lib/prisma.ts`
 
 ### Evolution API
-- External WhatsApp gateway: `atendai/evolution-api:v2.2.3`
+- External WhatsApp gateway: `evoapicloud/evolution-api:v2.3.7` (v2.2.3 had Baileys stream:error 515)
 - Retry: 3 attempts, exponential backoff (500ms * 2^attempt) on 429 or 5xx
 - Webhook events registered per instance: `MESSAGES_UPDATE`, `CONNECTION_UPDATE`, `MESSAGES_UPSERT`
 - Instance names are unique strings (not UUIDs)
@@ -96,7 +96,7 @@ Two parallel campaign dispatch implementations exist:
 | Runtime | In-process (Next.js) | Standalone Docker container |
 | Concurrency | 1 | 5 |
 | Throttle | `setTimeout` sleep loop | Staggered job `delay` |
-| Phone normalization | Yes (`normalizePhone`, adds `55` prefix) | No |
+| Phone normalization | Yes (`normalizePhone`, adds `55` prefix) | Yes (digits < 12 → `55${digits}`, in message-worker) |
 | Production path | No | **Yes** (docker-compose) |
 
 `src/lib/campaign-worker.ts` is legacy/dev fallback. `workers/` is canonical for production.
@@ -148,3 +148,18 @@ GitHub Actions (`.github/workflows/ci.yml`) — triggers on every push:
 - `contact.customFields` is a JSON field — interpolated into message templates via `workers/src/lib/interpolate.ts`
 - Campaign `throttleDelay` default: 3000ms (3s between messages), range 1000–60000ms
 - Message status flow: PENDING → SENT (SERVER_ACK) → DELIVERED (DELIVERY_ACK) → READ / FAILED
+- UI theme: dark futuristic — `#0a0f0d` bg, `#25D366` neon green primary, Orbitron font for headings
+- `dispatch-campaign` job payload includes `userId` (for ownership check in campaign-worker)
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+When the user types `/graphify`, invoke the `skill` tool with `skill: "graphify"` before doing anything else.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).

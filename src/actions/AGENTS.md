@@ -12,9 +12,9 @@ Server Actions for all mutations. `"use server"` at top of every file.
 | File | Domain |
 |------|--------|
 | `auth.ts` | register, login helpers |
-| `campaigns.ts` | createCampaign, startCampaign, pauseCampaign, cancelCampaign, scheduleCampaign, cancelSchedule |
-| `contacts.ts` | createContactList, deleteContactList, importContacts |
-| `instances.ts` | createInstance, deleteInstance, syncInstanceStatus |
+| `campaigns.ts` | createCampaign, startCampaign, pauseCampaign, cancelCampaign, deleteCampaign, scheduleCampaign, cancelSchedule |
+| `contacts.ts` | createContactList, deleteContactList, addContact, deleteContact, importContacts |
+| `instances.ts` | createInstance, getInstanceStatus, deleteInstance |
 | `inbox.ts` | markAsRead, markAllAsRead |
 | `dashboard.ts` | getDashboardStats (read-only server action) |
 | `webhook-config.ts` | registerWebhook for Evolution API |

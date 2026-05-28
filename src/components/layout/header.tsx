@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { LogOut, Terminal } from "lucide-react";
+import { signOut } from "next-auth/react";
 
 export function Header() {
   const pathname = usePathname();
@@ -16,8 +16,7 @@ export function Header() {
   };
 
   const handleLogout = () => {
-    // Placeholder - will be wired in T5
-    // TODO: implement logout
+    signOut({ callbackUrl: "/disparoswpp/login" });
   };
 
   return (

@@ -1,0 +1,782 @@
+{
+  "C:\\projetos\\disparoswpp\\components.json": {
+    "mtime": 1779392396.0,
+    "ast_hash": "d37c9d6701bafb02675152df323b964c",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\eslint.config.mjs": {
+    "mtime": 1779919961.91577,
+    "ast_hash": "68eed9125099cc8ad787b33cda84d27e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\next-env.d.ts": {
+    "mtime": 1779396260.0,
+    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\next.config.ts": {
+    "mtime": 1779919961.91577,
+    "ast_hash": "9d320bbe80fcd6505aca026a3826fc80",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\package.json": {
+    "mtime": 1779920725.882954,
+    "ast_hash": "9fdb8f8a84521df299158afaf28d1f52",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\postcss.config.mjs": {
+    "mtime": 1779391837.0,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\prisma.config.ts": {
+    "mtime": 1779392025.0,
+    "ast_hash": "92782b0ef282e893137e0dec46c0c8b3",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\tailwind.config.ts": {
+    "mtime": 1779391837.0,
+    "ast_hash": "0005921a0993a55ad0f20f9d603e7369",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\tsconfig.json": {
+    "mtime": 1779920797.751346,
+    "ast_hash": "e95d0de9bd4e9561723f6d9f12b12103",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\boulder.json": {
+    "mtime": 1779919961.91277,
+    "ast_hash": "943b91614fe8480be4e56d89533fdb10",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\run-continuation\\ses_192571663ffeSIR5IwnCAoMPqC.json": {
+    "mtime": 1779956426.1122296,
+    "ast_hash": "8aa1abea7a330835066c8c4b8475c71e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\run-continuation\\ses_19481451dffeq6g3yzvhDyRCCC.json": {
+    "mtime": 1779945186.805369,
+    "ast_hash": "c1f16df5ed172ad4ac8febeabc0a4ccc",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\run-continuation\\ses_1b3fd936bffeTQjL8jHlZfNV1G.json": {
+    "mtime": 1779392094.0,
+    "ast_hash": "4b9f8b7e3a32cb182de93e2c7b409147",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\run-continuation\\ses_1b439c167ffev5T7LPkoKX95Xk.json": {
+    "mtime": 1779388187.0,
+    "ast_hash": "4a682e8257eb3e6656b0c17d4712ac82",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\run-continuation\\ses_1b4462f74ffePrAhjYk1M4nFtm.json": {
+    "mtime": 1779919961.9147694,
+    "ast_hash": "59a5512103aec2afa5bb2551383c849f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.opencode\\opencode.json": {
+    "mtime": 1779956195.3972697,
+    "ast_hash": "1efe24ecf938911d4f23e4b1c6ec91f7",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.opencode\\package.json": {
+    "mtime": 1779956215.2192683,
+    "ast_hash": "9da2b87294a22da9e79bad08ba9aa53e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.opencode\\plugins\\graphify.js": {
+    "mtime": 1779956177.6206903,
+    "ast_hash": "32b67963417a30cb80544e0b2a56a98d",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\prisma\\seed.ts": {
+    "mtime": 1779397229.0,
+    "ast_hash": "150fac146dcab8155d9ae9b4e02c9942",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\prisma\\migrations\\0001_init\\migration.sql": {
+    "mtime": 1779392957.0,
+    "ast_hash": "1c19a7216b8714783dc6f158eac1a49a",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\auth.ts": {
+    "mtime": 1779919961.9227698,
+    "ast_hash": "8ad8ee9a3e45a0f27ab960b8c046824b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\instrumentation.ts": {
+    "mtime": 1779919956.0374777,
+    "ast_hash": "e412789099a1670b1b42bfbb6244676b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\middleware.ts": {
+    "mtime": 1779938212.6377287,
+    "ast_hash": "cf93b308810763f603e0fbc60bcb25c0",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\auth.ts": {
+    "mtime": 1779919961.91577,
+    "ast_hash": "28bdb935282b0feb5f2382ab00730b7b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\campaigns.ts": {
+    "mtime": 1779928912.4567454,
+    "ast_hash": "6b0bc58fdc985cb54d4ec0b843f7b918",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\contacts.ts": {
+    "mtime": 1779927623.6865346,
+    "ast_hash": "dfbbaf98e4f3bd3fee9452473a635959",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\dashboard.ts": {
+    "mtime": 1779394277.0,
+    "ast_hash": "cdf6753273d2a089575723dc666e1408",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\inbox.ts": {
+    "mtime": 1779394308.0,
+    "ast_hash": "f1b992885eafe1221ed9e24add5b9bba",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\instances.ts": {
+    "mtime": 1779926502.2208738,
+    "ast_hash": "167d287ce233ebcb3214eae75b3e0ee3",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\webhook-config.ts": {
+    "mtime": 1779933154.995086,
+    "ast_hash": "2123c090a48d78975b8392cec946e0e8",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\layout.tsx": {
+    "mtime": 1779392583.0,
+    "ast_hash": "480d0641a4c746a4494e9998847ce00d",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\page.tsx": {
+    "mtime": 1779391837.0,
+    "ast_hash": "c6568da095f78e9c922385271ffcbb2c",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(auth)\\layout.tsx": {
+    "mtime": 1779392588.0,
+    "ast_hash": "cd19696fbb33fd280e0819f6f4c15b09",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(auth)\\login\\page.tsx": {
+    "mtime": 1779944796.1485353,
+    "ast_hash": "7e02ab9d80a00f61592255eba604ed6f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(auth)\\register\\page.tsx": {
+    "mtime": 1779944827.9161842,
+    "ast_hash": "270e3ce38e9e18e3c63db8b4a69bb440",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\layout.tsx": {
+    "mtime": 1779943681.1855648,
+    "ast_hash": "d4a007d3458923ec82ff92f1fd7308c6",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\page.tsx": {
+    "mtime": 1779944920.3433466,
+    "ast_hash": "b2bc88de9c122be8ff5271e6a25012df",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\agendadas\\cancel-schedule-button.tsx": {
+    "mtime": 1779394870.0,
+    "ast_hash": "fee4e8ac0aa82851aee105d24e46a283",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\agendadas\\page.tsx": {
+    "mtime": 1779394864.0,
+    "ast_hash": "00b661a95ff56b921e6e9137340830fc",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\nova\\campaign-wizard.tsx": {
+    "mtime": 1779393762.0,
+    "ast_hash": "2758f1061f8b4cf8eec176329f5218bc",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\nova\\page.tsx": {
+    "mtime": 1779919961.9188125,
+    "ast_hash": "14b7e3251d332bf8a2dbdb579d9382a9",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\[id]\\page.tsx": {
+    "mtime": 1779944946.5324416,
+    "ast_hash": "d117a65a209f7bca872f0c15353990a0",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\campanhas\\[id]\\relatorio\\page.tsx": {
+    "mtime": 1779944970.2138047,
+    "ast_hash": "852e6b98051365032a82f20e677bdbb3",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\contatos\\page.tsx": {
+    "mtime": 1779944699.430764,
+    "ast_hash": "c15eb4d0d82f500b29a1465a292fb501",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\contatos\\nova\\page.tsx": {
+    "mtime": 1779944869.1578183,
+    "ast_hash": "070800a36cd6643aee2ea2292e509f71",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\contatos\\[listId]\\page.tsx": {
+    "mtime": 1779944900.1154213,
+    "ast_hash": "7d264afbd4b7601ea7bfcc44508d9d04",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\dashboard\\page.tsx": {
+    "mtime": 1779919961.91977,
+    "ast_hash": "950620a9995691e4e512375208e691f6",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\inbox\\page.tsx": {
+    "mtime": 1779394496.0,
+    "ast_hash": "0fbc39a38474585acfc04c34ba29aef4",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\inbox\\[instanceId]\\page.tsx": {
+    "mtime": 1779394521.0,
+    "ast_hash": "3459e705836727fa129263694546d8b1",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\instancias\\page.tsx": {
+    "mtime": 1779919961.91977,
+    "ast_hash": "9ed0905e52aa1330e156649ad98bb45e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\instancias\\nova\\page.tsx": {
+    "mtime": 1779393625.0,
+    "ast_hash": "af535ea21f6e8f559290c53210cbd1e0",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\(dashboard)\\relatorios\\page.tsx": {
+    "mtime": 1779945005.6640656,
+    "ast_hash": "aca68ccba8a3c093370858a967f41100",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\auth\\[...nextauth]\\route.ts": {
+    "mtime": 1779396238.0,
+    "ast_hash": "c896cd11e60592fe8637ff1516e55b5e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\campaigns\\media-upload\\route.ts": {
+    "mtime": 1779919961.9217708,
+    "ast_hash": "240d889b164e08679b5ba5378a19f7ab",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\campaigns\\[id]\\schedule\\route.ts": {
+    "mtime": 1779919961.9207702,
+    "ast_hash": "3f10263f90192c7a24338e2228607751",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\campaigns\\[id]\\stats\\route.ts": {
+    "mtime": 1779919961.9207702,
+    "ast_hash": "681a9a9e44b27107b678676742ccc3db",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\contacts\\import\\route.ts": {
+    "mtime": 1779919961.9217708,
+    "ast_hash": "4977126be749680a471411629e60c966",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\instances\\route.ts": {
+    "mtime": 1779927074.4703345,
+    "ast_hash": "d8763017fe57cabdeb611d3928efc08f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\instances\\[instanceId]\\qr\\route.ts": {
+    "mtime": 1779927632.2813785,
+    "ast_hash": "c93fae9b18396612b2eeb11090230917",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\webhooks\\evolution\\route.ts": {
+    "mtime": 1779396230.0,
+    "ast_hash": "b6a681c50c2cfd43d8d2bafb20cb0480",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\webhooks\\evolution\\config\\route.ts": {
+    "mtime": 1779919961.9227698,
+    "ast_hash": "642a51837896b8aa22716ddcf454bd22",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\campaigns\\campaign-actions.tsx": {
+    "mtime": 1779928957.5259085,
+    "ast_hash": "d9a7c221fd89184f3934a8a3d3b9d700",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\campaigns\\countdown-timer.tsx": {
+    "mtime": 1779945137.5638845,
+    "ast_hash": "61a4f4132e50443d8d47d9e0a0d17bad",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\campaigns\\datetime-picker.tsx": {
+    "mtime": 1779394790.0,
+    "ast_hash": "a2836359d1a909da7772ed66ad4f4248",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\campaigns\\media-upload.tsx": {
+    "mtime": 1779919961.9237704,
+    "ast_hash": "919ee2571fbc6e73fc3c7e36515a6635",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\campaigns\\template-editor.tsx": {
+    "mtime": 1779393702.0,
+    "ast_hash": "b95bb74db6d3bac5d4cb91ac059524e9",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\contacts\\add-contact-button.tsx": {
+    "mtime": 1779945033.2284794,
+    "ast_hash": "da850a98d18b0d4c73c19a594a55b0ce",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\contacts\\column-mapper.tsx": {
+    "mtime": 1779945063.4159203,
+    "ast_hash": "6a3b481f79ffc815a850faaea4a9dc1b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\contacts\\csv-upload.tsx": {
+    "mtime": 1779945098.4048493,
+    "ast_hash": "64f834b3a981058338bb5276899803f5",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\contacts\\delete-contact-button.tsx": {
+    "mtime": 1779919956.0354788,
+    "ast_hash": "3016d97b81c035804ab02fb9abda7e2f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\contacts\\delete-list-button.tsx": {
+    "mtime": 1779944706.4647865,
+    "ast_hash": "4d0d130bb7027bc11d0bd352d6a28cea",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\dashboard\\instance-status-list.tsx": {
+    "mtime": 1779394314.0,
+    "ast_hash": "d4d9043e1ac5660a1094cc5d262a9440",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\dashboard\\messages-chart.tsx": {
+    "mtime": 1779919961.9237704,
+    "ast_hash": "9f10d3378468f2e7fa19b31820cf388f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\dashboard\\recent-campaigns.tsx": {
+    "mtime": 1779394307.0,
+    "ast_hash": "b4a35c0798247742f3ac81cc907456ca",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\dashboard\\stats-cards.tsx": {
+    "mtime": 1779943702.6886058,
+    "ast_hash": "dc155ffd8546e3a042fc6e0d4d74151c",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\inbox\\message-item.tsx": {
+    "mtime": 1779945117.5755618,
+    "ast_hash": "4688ed3a408ad1798a96a99ee3d59967",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\inbox\\unread-badge.tsx": {
+    "mtime": 1779394384.0,
+    "ast_hash": "051dd25e237b34f05f2e3c599fccd7ee",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\instances\\instance-card.tsx": {
+    "mtime": 1779943723.5689495,
+    "ast_hash": "d3811729f6584aea6f5300f5687fa659",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\instances\\qr-code-dialog.tsx": {
+    "mtime": 1779919961.9247708,
+    "ast_hash": "d135221e067c76b901d11b26484112ba",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\layout\\header.tsx": {
+    "mtime": 1779955505.5468948,
+    "ast_hash": "20f81e559a0b583c1516225a2b6af2b4",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\layout\\sidebar.tsx": {
+    "mtime": 1779943650.967549,
+    "ast_hash": "ebf101a92dd073221aec832cb82d99f8",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\reports\\auto-refresh.tsx": {
+    "mtime": 1779394844.0,
+    "ast_hash": "e3579553d2c2ea63dbc4c479856eb18a",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\reports\\delivery-chart.tsx": {
+    "mtime": 1779394818.0,
+    "ast_hash": "2ff359680b3d08d8ed73980f12a59f51",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\reports\\message-table.tsx": {
+    "mtime": 1779394832.0,
+    "ast_hash": "e173378b0c2272db705cf19bac0cdcf8",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\alert.tsx": {
+    "mtime": 1779392434.0,
+    "ast_hash": "739c28799fae98b4fa01132494788e85",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\avatar.tsx": {
+    "mtime": 1779392434.0,
+    "ast_hash": "8b41492907a73176027427a3f0fd2302",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\badge.tsx": {
+    "mtime": 1779392432.0,
+    "ast_hash": "e4ec840217040d5630ee6ed7213a1d72",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\button.tsx": {
+    "mtime": 1779392416.0,
+    "ast_hash": "705bf3552a39e0c722665ccbecb30654",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\card.tsx": {
+    "mtime": 1779392432.0,
+    "ast_hash": "77a10bd948ca424972a28e704a3df604",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\checkbox.tsx": {
+    "mtime": 1779393637.0,
+    "ast_hash": "b2348d074d43a3597b5622982f1978b6",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\dialog.tsx": {
+    "mtime": 1779392434.0,
+    "ast_hash": "d9618a63d34473ec512321cc12d43692",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\dropdown-menu.tsx": {
+    "mtime": 1779392433.0,
+    "ast_hash": "e6107cbb2088437e76a858f75b5a0280",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\input.tsx": {
+    "mtime": 1779392432.0,
+    "ast_hash": "0607b02d99a2e92f9509223f36ccc6ec",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\label.tsx": {
+    "mtime": 1779392432.0,
+    "ast_hash": "a70440da86bfc6a07f15197cca48cb08",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\loading-spinner.tsx": {
+    "mtime": 1779392627.0,
+    "ast_hash": "e5d1d28e7bca421019da31be1837c002",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\progress.tsx": {
+    "mtime": 1779392433.0,
+    "ast_hash": "aa71e8ceb68b33af5ed5799f42cd873e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\radio-group.tsx": {
+    "mtime": 1779393638.0,
+    "ast_hash": "dab241ed149814052e52d1c9da34e754",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\separator.tsx": {
+    "mtime": 1779392434.0,
+    "ast_hash": "3de2dca3e47ab29c4b1f632671545628",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\sheet.tsx": {
+    "mtime": 1779392434.0,
+    "ast_hash": "43ad8bec991f7a28d2aa22d4f374e6b7",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\skeleton.tsx": {
+    "mtime": 1779392433.0,
+    "ast_hash": "0e6e825c43d858d98c9903f4da975382",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\slider.tsx": {
+    "mtime": 1779393637.0,
+    "ast_hash": "1ddc476cffc083f68378a07276c64546",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\status-badge.tsx": {
+    "mtime": 1779392624.0,
+    "ast_hash": "90a35eec7b85f93a56d2f79d32d085d5",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\table.tsx": {
+    "mtime": 1779392433.0,
+    "ast_hash": "44f87727e60080863edb00fdd2fcd8da",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\tabs.tsx": {
+    "mtime": 1779392433.0,
+    "ast_hash": "429035bc858475cd3bcedbb08a5ba8da",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\textarea.tsx": {
+    "mtime": 1779393638.0,
+    "ast_hash": "d448d2a90e48542e51b93a1189127bf2",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\ui\\tooltip.tsx": {
+    "mtime": 1779392434.0,
+    "ast_hash": "6566a444ce6c0a87d6611903430534fa",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\auth-utils.ts": {
+    "mtime": 1779919961.9257698,
+    "ast_hash": "60fdcf516131dd146ee9c0a93a2f2a15",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\campaign-worker.ts": {
+    "mtime": 1779919956.0374777,
+    "ast_hash": "6b6e04bc6787a518e823bb1d03033f10",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\evolution-client.ts": {
+    "mtime": 1779933138.0728395,
+    "ast_hash": "4095c4fe031782bdd6e486115bd5a88f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\prisma.ts": {
+    "mtime": 1779919961.9257698,
+    "ast_hash": "8ac15f5d662dceced12a1e5ca2acd58b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\queues.ts": {
+    "mtime": 1779396728.0,
+    "ast_hash": "e5192d2d8491d490b0f31e93a6476033",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\redis.ts": {
+    "mtime": 1779919961.9267702,
+    "ast_hash": "33af155f0e21bf99cfc274e8be4bf2f7",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\utils.ts": {
+    "mtime": 1779392553.0,
+    "ast_hash": "7ba1ad14d412320cd97764e7882856a3",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\webhook-processor.ts": {
+    "mtime": 1779393806.0,
+    "ast_hash": "c7627014da2965b4361e251782e2eb2b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\types\\campaign.ts": {
+    "mtime": 1779392490.0,
+    "ast_hash": "443ebe00ac8e03ec59f250177d7386d5",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\types\\evolution.ts": {
+    "mtime": 1779392392.0,
+    "ast_hash": "a0d99fd831b57c4b004ccf6a8ea53bbd",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\types\\index.ts": {
+    "mtime": 1779392392.0,
+    "ast_hash": "c12076c6d9e894236ace9634a187493b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\types\\next-auth.d.ts": {
+    "mtime": 1779393155.0,
+    "ast_hash": "b231dc7616cca3f54b22af2ddc24d59e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\package.json": {
+    "mtime": 1779396490.0,
+    "ast_hash": "d0f0485a129347d398f5d24840963837",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\tsconfig.json": {
+    "mtime": 1779391837.0,
+    "ast_hash": "c3ca244ec1800a8afb0c596bdf0cad8f",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\index.ts": {
+    "mtime": 1779930284.5510652,
+    "ast_hash": "6ccfc89d500ed8a3c7c7932cabe2cab6",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\lib\\evolution.ts": {
+    "mtime": 1779927981.8597636,
+    "ast_hash": "53c9282fc49ffa338cfe5a345fa2961c",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\lib\\interpolate.ts": {
+    "mtime": 1779394317.0,
+    "ast_hash": "ea028be730f7802e04b1cb21a57e7731",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\lib\\prisma.ts": {
+    "mtime": 1779396495.0,
+    "ast_hash": "0273a151ec2e906e392ec4cfd4e667ec",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\workers\\campaign-worker.ts": {
+    "mtime": 1779919961.9277706,
+    "ast_hash": "37e20e51c0df4998f2f61a31b5b36179",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\workers\\message-worker.ts": {
+    "mtime": 1779928008.8859024,
+    "ast_hash": "c063b7402d7029b5bbbc01113ef5d3f5",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\src\\workers\\scheduled-campaign-worker.ts": {
+    "mtime": 1779919961.9277706,
+    "ast_hash": "21864445593804c63758523292050ecf",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\AGENTS.md": {
+    "mtime": 1779956405.736777,
+    "ast_hash": "8c80d00684afeb433ae40e6e041ec63e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\docker-compose.yml": {
+    "mtime": 1779943164.161502,
+    "ast_hash": "7dac6dabbddc14847f7659adbfed1104",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.github\\workflows\\build-push.yml": {
+    "mtime": 1779919956.0184767,
+    "ast_hash": "f8842b6e3e9906683ce38e5b453cfa3c",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.github\\workflows\\ci.yml": {
+    "mtime": 1779391837.0,
+    "ast_hash": "f09bb530d83c7d105df53621823a2999",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-1-docker-config.txt": {
+    "mtime": 1779392062.0,
+    "ast_hash": "74c8e59cdce55710b2eb4cd8aa12071b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-1-env.txt": {
+    "mtime": 1779392062.0,
+    "ast_hash": "2737b49252e2a4c0fe4c342e92b13285",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-1-tsc.txt": {
+    "mtime": 1779392079.0,
+    "ast_hash": "cad4cd5097cabef7c587ae954c1c7ad4",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-10-tsc.txt": {
+    "mtime": 1779393822.0,
+    "ast_hash": "3bc3c44089b276ebf784d0e66c1916dd",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-11-tsc.txt": {
+    "mtime": 1779394362.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-14-tsc.txt": {
+    "mtime": 1779394525.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-2-validate.txt": {
+    "mtime": 1779392497.0,
+    "ast_hash": "cd5c1db693473e2a0238722a2a2a0e84",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-3-tsc.txt": {
+    "mtime": 1779392581.0,
+    "ast_hash": "41889c4a62cc644566359bdbfd6fda32",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-4-tsc.txt": {
+    "mtime": 1779392697.0,
+    "ast_hash": "41889c4a62cc644566359bdbfd6fda32",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-5-tsc.txt": {
+    "mtime": 1779393193.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-6-tsc.txt": {
+    "mtime": 1779393857.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-7-tsc.txt": {
+    "mtime": 1779393870.0,
+    "ast_hash": "b4f1b7f735b52567670891802d24b04b",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-8-tsc.txt": {
+    "mtime": 1779394407.0,
+    "ast_hash": "7da7393ec770f324f7865d52a56f7185",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-9-tsc.txt": {
+    "mtime": 1779393852.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\notepads\\disparoswpp\\decisions.md": {
+    "mtime": 1779391625.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\notepads\\disparoswpp\\issues.md": {
+    "mtime": 1779391625.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\notepads\\disparoswpp\\learnings.md": {
+    "mtime": 1779394945.0,
+    "ast_hash": "5249b7319a94401297da2a7788e68eb8",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\notepads\\disparoswpp\\problems.md": {
+    "mtime": 1779391625.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\plans\\disparoswpp.md": {
+    "mtime": 1779919961.9137702,
+    "ast_hash": "9caf501d651203c0d19fb934dbe3ca33",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\actions\\AGENTS.md": {
+    "mtime": 1779956437.2098916,
+    "ast_hash": "a561a37f6c4463f21ee8395a3a2a9067",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\app\\api\\AGENTS.md": {
+    "mtime": 1779920233.952908,
+    "ast_hash": "145a44d0a5deb8031f8bd6a6a5347a8a",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\components\\AGENTS.md": {
+    "mtime": 1779956418.4233687,
+    "ast_hash": "16da230053959512dd0fcb414fe5b164",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\src\\lib\\AGENTS.md": {
+    "mtime": 1779956413.3231819,
+    "ast_hash": "648b63111b93c7cf3aaef2aad46f5e57",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\workers\\AGENTS.md": {
+    "mtime": 1779956416.184131,
+    "ast_hash": "f9c869178ec7cd13fb175a38a87e0b44",
+    "semantic_hash": ""
+  },
+  "C:\\projetos\\disparoswpp\\.omo\\evidence\\task-4-layout.png": {
+    "mtime": 1779392839.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  }
+}

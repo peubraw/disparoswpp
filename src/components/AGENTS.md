@@ -30,6 +30,8 @@ components/
 - `react-hook-form` + `zod` for all forms
 - `recharts` for charts (messages-chart, delivery-chart)
 - `lucide-react` for icons
+- Dark futuristic theme: bg `#0a0f0d`, primary `#25D366` neon green, `font-orbitron` for headings (Orbitron via Google Fonts)
+- Use CSS vars (`--primary`, `--background`, etc.) NOT hardcoded hex in new components
 
 ## ANTI-PATTERNS
 - Never fetch data inside components — lift to page.tsx Server Components
