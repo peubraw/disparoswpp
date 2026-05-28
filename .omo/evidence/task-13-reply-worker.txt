@@ -1,0 +1,7 @@
+Task 13 evidence
+- Created workers/src/workers/reply-worker.ts
+- Exported processSendReply(job: Job)
+- Payload: { inboxMessageId, instanceName, remoteJid, text }
+- Uses workers/src/lib/evolution.ts evolutionClient.sendText(instanceName, remoteJid, text)
+- Catches errors and does not rethrow
+- Typecheck: npx tsc --noEmit in workers/ passed
